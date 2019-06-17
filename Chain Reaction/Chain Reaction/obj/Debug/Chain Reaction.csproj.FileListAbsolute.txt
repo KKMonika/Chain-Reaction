@@ -1,0 +1,10 @@
+C:\Users\Computer\source\repos\Chain Reaction\Chain Reaction\bin\Debug\Chain Reaction.exe.config
+C:\Users\Computer\source\repos\Chain Reaction\Chain Reaction\bin\Debug\Chain Reaction.exe
+C:\Users\Computer\source\repos\Chain Reaction\Chain Reaction\bin\Debug\Chain Reaction.pdb
+C:\Users\Computer\source\repos\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.csprojAssemblyReference.cache
+C:\Users\Computer\source\repos\Chain Reaction\Chain Reaction\obj\Debug\Chain_Reaction.Form1.resources
+C:\Users\Computer\source\repos\Chain Reaction\Chain Reaction\obj\Debug\Chain_Reaction.Properties.Resources.resources
+C:\Users\Computer\source\repos\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.csproj.GenerateResource.cache
+C:\Users\Computer\source\repos\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.csproj.CoreCompileInputs.cache
+C:\Users\Computer\source\repos\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.exe
+C:\Users\Computer\source\repos\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.pdb
