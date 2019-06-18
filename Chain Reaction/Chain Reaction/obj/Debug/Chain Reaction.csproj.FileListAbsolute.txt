@@ -8,3 +8,14 @@ C:\Users\Computer\source\repos\Chain Reaction\Chain Reaction\obj\Debug\Chain Rea
 C:\Users\Computer\source\repos\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.csproj.CoreCompileInputs.cache
 C:\Users\Computer\source\repos\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.exe
 C:\Users\Computer\source\repos\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.pdb
+D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\bin\Debug\Chain Reaction.exe.config
+D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\bin\Debug\Chain Reaction.exe
+D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\bin\Debug\Chain Reaction.pdb
+D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.csprojAssemblyReference.cache
+D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain_Reaction.Form1.resources
+D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain_Reaction.Properties.Resources.resources
+D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.csproj.GenerateResource.cache
+D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.csproj.CoreCompileInputs.cache
+D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.exe
+D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.pdb
+D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain_Reaction.MainPage.resources
