@@ -10,6 +10,7 @@ namespace Chain_Reaction
     [Serializable]
    public class BigBall
     {
+        public int initialRadius;
         public int RADIUS;
         public Point Center { get; set; }
         public Color Color { get; set; }
@@ -18,7 +19,8 @@ namespace Chain_Reaction
         {
             Center = center;
             Color = color;
-            RADIUS = 20; //test moze i da e promeni, a ponataka moze da i dodademe i ramka okolu
+            initialRadius = 30; //test moze i da e promeni, a ponataka moze da i dodademe i ramka okolu
+            RADIUS = 30;
         }
 
         public void Draw(Graphics g)
@@ -27,7 +29,7 @@ namespace Chain_Reaction
             g.FillEllipse(b, Center.X - RADIUS, Center.Y - RADIUS, RADIUS * 2, RADIUS * 2);
             b.Dispose();
         }
-        public bool Touches(SmallBalls ball)
+        public bool Touches(SmallBall ball)
         {
             return (ball.Center.X - Center.X) * (ball.Center.X - Center.X) + (ball.Center.Y - Center.Y) * (ball.Center.Y - Center.Y) <= RADIUS * RADIUS;
 

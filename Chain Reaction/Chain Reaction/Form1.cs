@@ -17,7 +17,8 @@ namespace Chain_Reaction
     {
         BallsDoc ballsDoc; //treba da se pojavuvaat po odredena postignata vrednost na Radiusot na bigBall
         BigBall bigBall; //treba da se pojavuva na klik
-        SmallBalls balls;
+        SmallBall balls;
+        int maxTopcinja;
         Color currentColor;
         Timer timer;
         int leftX;
@@ -27,12 +28,13 @@ namespace Chain_Reaction
         bool flag = false;
         private int generateBall = 0;
         Random random;
-        private String FileName;
+        private String FileName; //za serijalizacija
         public Form1()
         {
             InitializeComponent();
             ballsDoc = new BallsDoc(); //treba da se doraboti
             random = new Random();
+            maxTopcinja = 30;
             this.DoubleBuffered = true;
             currentColor = Color.Red; // pokasno da se napravi da se bira boja
             timer = new Timer();
@@ -48,10 +50,10 @@ namespace Chain_Reaction
         }
         void timer_Tick(object sender, EventArgs e)
         {
-            if (generateBall % 10 == 0)
+            if (generateBall < maxTopcinja)
             {
-                int y = random.Next(height, width);
-                int x = -SmallBalls.RADIUS;
+                int x = random.Next(leftX+10, leftX + width-10); //leftX+10 i  leftX+width-10 zatoa sto ako se pogodi na rabot, lesno moze da izleze nadvor
+                int y = random.Next(topY+10, topY+height-10);
                 ballsDoc.AddBall(new Point(x, y));
             }
             ++generateBall; //test
@@ -68,19 +70,19 @@ namespace Chain_Reaction
             //i da se zgolemuva radiusot na goleamta so toa
             if (flag)
             {
-                foreach (SmallBalls ball in ballsDoc.Balls)
+                foreach (SmallBalls ball in ballsDoc.smallBalls)
                 {
                     if (bigBall.Touches(ball))
                     {
-                        ball.isColided = true;
+                        ball.isHit = true;
                         bigBall.changeRadius();
                     }
                 }
-                for(int i = ballsDoc.Balls.Count; i >=0; i--)
+                for(int i = ballsDoc.smallBalls.Count; i >=0; i--)
                 {
-                    if(ballsDoc.Balls[i].isColided)
+                    if(ballsDoc.smallBalls[i].isHit)
                     {
-                        ballsDoc.Balls.RemoveAt(i);
+                        ballsDoc.smallBalls.RemoveAt(i);
                     }
                 }
             }

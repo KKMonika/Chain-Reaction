@@ -8,32 +8,32 @@ using System.Threading.Tasks;
 namespace Chain_Reaction
 {
     [Serializable]
-    public class SmallBalls
+    public class SmallBall
     {
         //treba da se pojavuvaat na random lokacii
         public static readonly int RADIUS = 10; //test vrednost 
         //radiusot ne treba da im se menuva
         public Point Center { get; set; }
         public Color Color { get; set; } //predlog da se naprajt sekoe so razlicna boja
-        public int State { get; set; }
-        public double Angle { get; set; }
-        public double Velocity {get; set;}
-        public float velocityX;
-        public float velocityY;
+        public int State { get; set; } //za koja boja ke bide topceto, ke se dodeluva so random vrednost
 
-        public bool isColided { get; set; } //ako se dopiraat so golemata topka
+        public double Angle { get; set; } //za vo koja nasoka ke se dvizi topceto
+        public double Velocity {get; set;} //so koja brzina ke se dvizi
 
-        public SmallBalls()
+        private float velocityX;
+        private float velocityY;
+
+        public bool isHit { get; set; } //ako se dopiraat so golemata topka
+
+        public SmallBall()
         {
-           
-            isColided = false;
+            isHit = false;
             Velocity = 10;
             Random r = new Random();
             Angle = r.NextDouble() * 2 * Math.PI;
             velocityX = (float)(Math.Cos(Angle) * Velocity);
             velocityY = (float)(Math.Sin(Angle) * Velocity);
             State = r.Next(3);
-
         }
 
         public void Draw(Graphics g)
@@ -55,10 +55,10 @@ namespace Chain_Reaction
             b.Dispose();
         }
 
-        public bool isColiding(BigBall ball)
+        public bool isColliding(BigBall ball)
         {
             double d = (Center.X - ball.Center.X) * (Center.X - ball.Center.X) + (Center.Y - ball.Center.Y) * (Center.Y - ball.Center.Y);
-            return d <= (2 * RADIUS) * (2 * RADIUS);
+            return d <= (RADIUS + ball.RADIUS) * (RADIUS + ball.RADIUS);
         }
 
         public void Move(int left, int top, int width, int height)

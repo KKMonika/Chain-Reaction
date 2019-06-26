@@ -10,16 +10,17 @@ namespace Chain_Reaction
     [Serializable]
     public class BallsDoc
     {
-        public List<SmallBalls> Balls { get; set; }
+        public List<SmallBall> smallBalls { get; set; }
+        public List<BigBall> bigBalls { get; set; }
         public BallsDoc()
         {
-            Balls = new List<SmallBalls>();
-
+            smallBalls = new List<SmallBall>();
+            bigBalls = new List<BigBall>();
         }
 
         public void Draw(Graphics g)
         {
-            foreach(SmallBalls ball in Balls)
+            foreach(SmallBall ball in smallBalls)
             {
                 ball.Draw(g);
             }
@@ -27,19 +28,32 @@ namespace Chain_Reaction
 
         public void AddBall(Point position)
         {
-            SmallBalls b = new SmallBalls();
+            SmallBall b = new SmallBall();
             b.Center = position;
-            Balls.Add(b);
+            smallBalls.Add(b);
         }
 
         public void MoveBalls(int left, int top, int width, int height)
         {
-            foreach(SmallBalls ball in Balls)
+            foreach(SmallBall ball in smallBalls)
             {
                 ball.Move(left, top, width, height);
             }
         }
 
         //funkcija checkColisions vo glavnata forma
+        /*void checkCollisions()
+        {
+            for(int i=0; i<smallBalls.Count; i++)
+            {
+                for(int j= i + 1; j<smallBalls.Count; j++)
+                {
+                    if (i != j && smallBalls[i].isColliding(smallBalls[j]))
+                        {
+
+                    }
+                }
+            }
+        }*/
     }
 }
