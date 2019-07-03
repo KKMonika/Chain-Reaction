@@ -17,17 +17,20 @@ namespace Chain_Reaction
     {
         BallsDoc ballsDoc; //treba da se pojavuvaat po odredena postignata vrednost na Radiusot na bigBall
         BigBall bigBall; //treba da se pojavuva na klik
-        SmallBall firstBall;
+       // SmallBall firstBall;
         int maxTopcinja;
         Color currentColor;
+
         Timer timer;
         int leftX;
         int topY;
         int width;
         int height;
-        bool flag = false;
+
         private int generateBall = 0;
+        int level; // level
         Random random;
+
         private String FileName; //za serijalizacija
         public Form1()
         {
@@ -46,7 +49,9 @@ namespace Chain_Reaction
             topY = 60; //test vrednosti predlog za cela forma 816:489
             width = this.Width - (3 * leftX);
             height = this.Height - (int)(2.5 * topY);
-            //golema topka ne inicijalizirame tuku toa ke se pravi so nastanot MOUSE CLICK
+
+            level = 1;
+           
 
         }
         void timer_Tick(object sender, EventArgs e)
@@ -59,36 +64,16 @@ namespace Chain_Reaction
             }
             ++generateBall; //test
             ballsDoc.MoveBalls(leftX, topY, width, height);
+            if(ballsDoc.hasClicked) // ako ima mouse click togas da proveruva kolizii
             ballsDoc.checkCollisions();
+
+            ballsDoc.nextLevel(); // proverka za sledno nivo
+
             Invalidate(true);
             //ne dovrseno za game over da se definira posle kolku vreme
         }
 
-        /*void CheckColisions()
-        {
-            //da se proveraat koi topcinja se vo golemata
-            //i da se zgolemuva radiusot na goleamta so toa
-            if (flag)
-            {
-                foreach (SmallBalls ball in ballsDoc.smallBalls)
-                {
-                    if (bigBall.Touches(ball))
-                    {
-                        ball.isHit = true;
-                        bigBall.changeRadius();
-                    }
-                }
-                for(int i = ballsDoc.smallBalls.Count; i >=0; i--)
-                {
-                    if(ballsDoc.smallBalls[i].isHit)
-                    {
-                        ballsDoc.smallBalls.RemoveAt(i);
-                    }
-                }
-            }
-        }
-        */
-
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -97,7 +82,9 @@ namespace Chain_Reaction
 
         private void statusStrip1_Paint(object sender, PaintEventArgs e)
         {
-
+            toolStripStatusLabel2.Text = string.Format("Poeni: {0}", ballsDoc.poeni());
+            toolStripStatusLabel1.Text = string.Format("Level: {0}", level);
+            
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -107,9 +94,10 @@ namespace Chain_Reaction
             e.Graphics.DrawRectangle(pen, leftX, topY, width, height);
             pen.Dispose();
             ballsDoc.Draw(e.Graphics);
-            if (flag)
+           
+            if (ballsDoc.hasClicked) //samo ako e kliknato togas da se iscrta golemata topka
             {
-                firstBall.DrawFirst(e.Graphics);
+                bigBall.Draw(e.Graphics);
             }
 
         }
@@ -125,13 +113,22 @@ namespace Chain_Reaction
             if (!ballsDoc.hasClicked)
             {
                 ballsDoc.hasClicked = true;
-                firstBall = new SmallBall();
-                firstBall.State = 3;
-                firstBall.bigBall = true;
-                flag = true;
-                //ballsDoc.AddBall(e.Location);
+                bigBall = new BigBall(e.Location, Color.Black);
+                bigBall.isSet = true;
+                ballsDoc.bigBall = bigBall;
             }
-            Invalidate();
+            Invalidate(true);
+            /* if (!ballsDoc.hasClicked)
+             {
+                 ballsDoc.hasClicked = true;
+                 firstBall = new SmallBall();
+                 firstBall.State = 3;
+                 firstBall.bigBall = true;
+                 flag = true;
+                 //ballsDoc.AddBall(e.Location);
+             }
+             Invalidate();
+             */
         }
         
 

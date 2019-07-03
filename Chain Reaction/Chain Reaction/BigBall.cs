@@ -15,12 +15,15 @@ namespace Chain_Reaction
         public Point Center { get; set; }
         public Color Color { get; set; }
 
+        public bool isSet  { get; set; } // dali sme postavile topka
+
         public BigBall(Point center, Color color)
         {
             Center = center;
             Color = color;
             initialRadius = 30; //test moze i da e promeni, a ponataka moze da i dodademe i ramka okolu
             RADIUS = 30;
+            isSet = false;
         }
 
         public void Draw(Graphics g)
@@ -36,7 +39,7 @@ namespace Chain_Reaction
         }
         public void changeRadius()
         {
-            RADIUS += 10;
+            RADIUS += 5;
         }
         
     }

@@ -70,12 +70,20 @@ namespace Chain_Reaction
             b.Dispose();
         }
 
-        public bool isColliding(SmallBall ball)
+        /*public bool isColliding(SmallBall ball)
         {
             double distance = (Center.X - ball.Center.X) * (Center.X - ball.Center.X) + (Center.Y - ball.Center.Y) * (Center.Y - ball.Center.Y);
             bool smallBigImpact = this.bigBall && !ball.bigBall; //mora tekovnoto topce da bide golemo, a drugoto malo za da se dobijat poeni
             return distance <= (radius + ball.radius) * (radius + ball.radius) && smallBigImpact;
         }
+        */
+
+            public bool isColliding(BigBall ball)
+        {
+            double distance = (Center.X - ball.Center.X) * (Center.X - ball.Center.X) + (Center.Y - ball.Center.Y) * (Center.Y - ball.Center.Y);
+            return distance <= (radius + ball.RADIUS) *(radius + ball.RADIUS);
+        }
+
 
         public void Move(int left, int top, int width, int height)
         {

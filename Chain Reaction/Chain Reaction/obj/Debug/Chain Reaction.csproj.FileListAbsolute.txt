@@ -19,3 +19,14 @@ D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Cha
 D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.exe
 D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.pdb
 D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain_Reaction.MainPage.resources
+C:\Users\Computer\Desktop\Game\Chain-Reaction\Chain Reaction\Chain Reaction\bin\Debug\Chain Reaction.exe.config
+C:\Users\Computer\Desktop\Game\Chain-Reaction\Chain Reaction\Chain Reaction\bin\Debug\Chain Reaction.exe
+C:\Users\Computer\Desktop\Game\Chain-Reaction\Chain Reaction\Chain Reaction\bin\Debug\Chain Reaction.pdb
+C:\Users\Computer\Desktop\Game\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.csprojAssemblyReference.cache
+C:\Users\Computer\Desktop\Game\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain_Reaction.Form1.resources
+C:\Users\Computer\Desktop\Game\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain_Reaction.MainPage.resources
+C:\Users\Computer\Desktop\Game\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain_Reaction.Properties.Resources.resources
+C:\Users\Computer\Desktop\Game\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.csproj.GenerateResource.cache
+C:\Users\Computer\Desktop\Game\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.csproj.CoreCompileInputs.cache
+C:\Users\Computer\Desktop\Game\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.exe
+C:\Users\Computer\Desktop\Game\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.pdb
