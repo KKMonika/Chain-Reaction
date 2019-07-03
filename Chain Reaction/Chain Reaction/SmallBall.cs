@@ -11,7 +11,7 @@ namespace Chain_Reaction
     public class SmallBall
     {
         //treba da se pojavuvaat na random lokacii
-        public static readonly int RADIUS = 10; //test vrednost 
+        public int radius; //test vrednost 
         //radiusot ne treba da im se menuva
         public Point Center { get; set; }
         public Color Color { get; set; } //predlog da se naprajt sekoe so razlicna boja
@@ -22,12 +22,16 @@ namespace Chain_Reaction
 
         private float velocityX;
         private float velocityY;
+        
+        public bool bigBall { get; set; } //bool promenliva za da znaeme dali topceto moze da predizvika kolizija so drugo malo topce za da se dobijat poeni
 
         public bool isHit { get; set; } //ako se dopiraat so golemata topka
 
         public SmallBall()
         {
             isHit = false;
+            radius = 10; //pocetna vrednost za sekoe topce pri
+            bigBall = false;
             Velocity = 10;
             Random r = new Random();
             Angle = r.NextDouble() * 2 * Math.PI;
@@ -38,42 +42,59 @@ namespace Chain_Reaction
 
         public void Draw(Graphics g)
         {
-            Brush b = null;
             if (State == 0)
             {
-                b = new SolidBrush(Color.Green);
+                Color = Color.Green;
             }
             else if (State == 1)
             {
-                b = new SolidBrush(Color.Blue);
+                Color = Color.Blue;
+            }
+            else if (State == 2)
+            {
+                Color = Color.Red;
             }
             else
             {
-                b = new SolidBrush(Color.Red);
+                Color = Color.Black;
             }
-            g.FillEllipse(b, Center.X - RADIUS, Center.Y - RADIUS, RADIUS * 2, RADIUS * 2);
+            Brush b = new SolidBrush(Color);
+            g.FillEllipse(b, Center.X - radius, Center.Y - radius, radius * 2, radius * 2);
             b.Dispose();
         }
 
-        public bool isColliding(BigBall ball)
+        public void DrawFirst(Graphics g)
         {
-            double d = (Center.X - ball.Center.X) * (Center.X - ball.Center.X) + (Center.Y - ball.Center.Y) * (Center.Y - ball.Center.Y);
-            return d <= (RADIUS + ball.RADIUS) * (RADIUS + ball.RADIUS);
+            Brush b = new SolidBrush(Color.Black);
+            g.FillEllipse(b, Center.X - radius, Center.Y - radius, radius * 2, radius * 2);
+            b.Dispose();
+        }
+
+        public bool isColliding(SmallBall ball)
+        {
+            double distance = (Center.X - ball.Center.X) * (Center.X - ball.Center.X) + (Center.Y - ball.Center.Y) * (Center.Y - ball.Center.Y);
+            bool smallBigImpact = this.bigBall && !ball.bigBall; //mora tekovnoto topce da bide golemo, a drugoto malo za da se dobijat poeni
+            return distance <= (radius + ball.radius) * (radius + ball.radius) && smallBigImpact;
         }
 
         public void Move(int left, int top, int width, int height)
         {
-            float nextX = Center.X + velocityX;
-            float nextY = Center.Y + velocityY;
-            if (nextX - RADIUS <= left || nextX + RADIUS >= width + left)
+            if(!bigBall)
             {
-                velocityX = -velocityX;
+                float nextX = Center.X + velocityX;
+                float nextY = Center.Y + velocityY;
+                if (nextX - radius <= left || nextX + radius >= width + left)
+                {
+                    velocityX = -velocityX;
+                }
+                if(nextY - radius <= top || nextY + radius >= height + top)
+                {
+                    velocityY = -velocityY;
+                }
+                Center = new Point((int)(Center.X + velocityX), (int)(Center.Y + velocityY));
             }
-            if(nextY - RADIUS <= top || nextY + RADIUS >= height + top)
-            {
-                velocityY = -velocityY;
-            }
-            Center = new Point((int)(Center.X + velocityX), (int)(Center.Y + velocityY));
+
+            
         }
     }
 }

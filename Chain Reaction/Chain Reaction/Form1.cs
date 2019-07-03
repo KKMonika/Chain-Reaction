@@ -17,7 +17,7 @@ namespace Chain_Reaction
     {
         BallsDoc ballsDoc; //treba da se pojavuvaat po odredena postignata vrednost na Radiusot na bigBall
         BigBall bigBall; //treba da se pojavuva na klik
-        SmallBall balls;
+        SmallBall firstBall;
         int maxTopcinja;
         Color currentColor;
         Timer timer;
@@ -33,6 +33,7 @@ namespace Chain_Reaction
         {
             InitializeComponent();
             ballsDoc = new BallsDoc(); //treba da se doraboti
+            
             random = new Random();
             maxTopcinja = 30;
             this.DoubleBuffered = true;
@@ -58,10 +59,9 @@ namespace Chain_Reaction
             }
             ++generateBall; //test
             ballsDoc.MoveBalls(leftX, topY, width, height);
-            //CheckColisions();
+            ballsDoc.checkCollisions();
             Invalidate(true);
             //ne dovrseno za game over da se definira posle kolku vreme
-
         }
 
         /*void CheckColisions()
@@ -109,23 +109,32 @@ namespace Chain_Reaction
             ballsDoc.Draw(e.Graphics);
             if (flag)
             {
-                bigBall.Draw(e.Graphics);
+                firstBall.DrawFirst(e.Graphics);
             }
 
         }
 
-        private void Form1_ResizeEnd(object sender, EventArgs e)
+        /*private void Form1_ResizeEnd(object sender, EventArgs e)
         {
             width = this.Width - (3 * leftX);
             height = this.Height - (int)(2.5 * topY);
-        }
+        }*/
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
-            bigBall = new BigBall(e.Location, Color.Black);
-            Invalidate(true);
-            flag = true;
+            if (!ballsDoc.hasClicked)
+            {
+                ballsDoc.hasClicked = true;
+                firstBall = new SmallBall();
+                firstBall.State = 3;
+                firstBall.bigBall = true;
+                flag = true;
+                //ballsDoc.AddBall(e.Location);
+            }
+            Invalidate();
         }
+        
+
         private void saveFile()
         {
             if (FileName == null)
