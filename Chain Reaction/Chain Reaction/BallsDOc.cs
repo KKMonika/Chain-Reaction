@@ -53,16 +53,29 @@ namespace Chain_Reaction
         {
             for(int i = 0; i < balls.Count; i++)
             {
-                    if (balls[i].isColliding(bigBall))
+                for(int j = i+1; j < balls.Count; j++)
+                { 
+                    if (!balls[i].isHit && balls[i].isCollidingBig(bigBall))
                     {
                         count++;
                         balls[i].isHit = true;
-            
                     }
+
+                    else if (balls[i].isCollidingSmall(balls[j]) && balls[i].isHit && !balls[j].isHit)
+                    {
+                        balls[j].isHit = true;
+                    }
+
+                    else if (balls[j].isCollidingSmall(balls[i]) && balls[j].isHit && !balls[i].isHit)
+                    {
+                        balls[i].isHit = true;
+                    }
+                }
             }
             for(int i = balls.Count - 1; i >= 0; i--)
             {
-                if (balls[i].isHit) balls.RemoveAt(i);
+                if (balls[i].isHit)
+                    balls[i].increaseRadius();
             }
         }
         public void nextLevel()

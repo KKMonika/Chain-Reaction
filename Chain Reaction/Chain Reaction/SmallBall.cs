@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Chain_Reaction
@@ -11,6 +13,7 @@ namespace Chain_Reaction
     public class SmallBall
     {
         //treba da se pojavuvaat na random lokacii
+        public static int MAX_RADIUS = 30;
         public int radius; //test vrednost 
         //radiusot ne treba da im se menuva
         public Point Center { get; set; }
@@ -26,6 +29,8 @@ namespace Chain_Reaction
         public bool bigBall { get; set; } //bool promenliva za da znaeme dali topceto moze da predizvika kolizija so drugo malo topce za da se dobijat poeni
 
         public bool isHit { get; set; } //ako se dopiraat so golemata topka
+
+        private Stopwatch increaseTimer;
 
         public SmallBall()
         {
@@ -78,16 +83,47 @@ namespace Chain_Reaction
         }
         */
 
-            public bool isColliding(BigBall ball)
+        public bool isCollidingBig(BigBall bigBall)
         {
-            double distance = (Center.X - ball.Center.X) * (Center.X - ball.Center.X) + (Center.Y - ball.Center.Y) * (Center.Y - ball.Center.Y);
-            return distance <= (radius + ball.RADIUS) *(radius + ball.RADIUS);
+            double distanceBigBall = (Center.X - bigBall.Center.X) * (Center.X - bigBall.Center.X) + (Center.Y - bigBall.Center.Y) * (Center.Y - bigBall.Center.Y);
+            return distanceBigBall <= (radius + bigBall.RADIUS) * (radius + bigBall.RADIUS);
         }
 
+        public bool isCollidingSmall(SmallBall smallBall)
+        {
+            double distanceSmallBall = (Center.X - smallBall.Center.X) * (Center.X - smallBall.Center.X) + (Center.Y - smallBall.Center.Y) * (Center.Y - smallBall.Center.Y);
+            return isHit && distanceSmallBall <= (radius + smallBall.radius) * (radius + smallBall.radius);
+        }
+
+        public void increaseRadius()
+        {
+            /*increaseTimer = new Stopwatch();
+            increaseTimer.Start();
+            bool flag = false;
+            while(!flag)
+            {
+                if(increaseTimer.ElapsedMilliseconds % 100 == 0 && increaseTimer.ElapsedMilliseconds < 1000) //na sekoja sekunda raste radiusot na krugot
+                {
+                    radius += 2;
+                }
+
+                if(increaseTimer.ElapsedMilliseconds > 10000)
+                {
+                    flag = true;
+                }
+            }
+            increaseTimer.Stop();
+            return true;*/
+
+            if (radius < MAX_RADIUS)
+                radius += 5;
+
+        }
+        
 
         public void Move(int left, int top, int width, int height)
         {
-            if(!bigBall)
+            if(!isHit)
             {
                 float nextX = Center.X + velocityX;
                 float nextY = Center.Y + velocityY;
@@ -101,7 +137,6 @@ namespace Chain_Reaction
                 }
                 Center = new Point((int)(Center.X + velocityX), (int)(Center.Y + velocityY));
             }
-
             
         }
     }

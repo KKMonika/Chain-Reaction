@@ -38,7 +38,7 @@ namespace Chain_Reaction
             ballsDoc = new BallsDoc(); //treba da se doraboti
             
             random = new Random();
-            maxTopcinja = 30;
+            maxTopcinja = 20;
             this.DoubleBuffered = true;
             currentColor = Color.Red; // pokasno da se napravi da se bira boja
             timer = new Timer();
@@ -65,7 +65,7 @@ namespace Chain_Reaction
             ++generateBall; //test
             ballsDoc.MoveBalls(leftX, topY, width, height);
             if(ballsDoc.hasClicked) // ako ima mouse click togas da proveruva kolizii
-            ballsDoc.checkCollisions();
+                ballsDoc.checkCollisions();
 
             ballsDoc.nextLevel(); // proverka za sledno nivo
 
@@ -177,6 +177,11 @@ namespace Chain_Reaction
                 }
                 Invalidate(true);
             }
+        }
+
+        private void timerIncrease_Tick(object sender, EventArgs e)
+        {
+
         }
     }
 }
