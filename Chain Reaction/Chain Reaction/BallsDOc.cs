@@ -19,7 +19,7 @@ namespace Chain_Reaction
         public List<SmallBall> balls { get; set; }
         public BigBall bigBall { get; set; }
         public int count { get; set; } //kolku topcinja se pogodeni
-        public int needToHit { get; set; } // kolku topcinja treba da se pogodat za da bide pominato nivoto
+       // public int needToHit { get; set; } // kolku topcinja treba da se pogodat za da bide pominato nivoto
         bool levelChange = false; // dali da se smeni levelot
         public LEVELS currentLevel;
         public bool hasClicked { get; set; }  //se menuva vo true samo pri klik na pocetokot vo formata, posle toa pri sekoj sleden klik nema da se kreira novo topce
@@ -156,6 +156,16 @@ namespace Chain_Reaction
         {
             return count * 1000;
         }
+
+        public int needToHit() {
+            if (currentLevel == LEVELS.L1)
+            {
+                return 3;
+            }
+            else if (currentLevel == LEVELS.L2) return 5;
+           else  return 15;
+            }
+      
 
 
         

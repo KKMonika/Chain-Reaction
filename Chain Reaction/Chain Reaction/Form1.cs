@@ -38,6 +38,7 @@ namespace Chain_Reaction
             InitializeComponent();
             //ballsDoc = new BallsDoc(); //treba da se doraboti
             levelsDoc = new Levels();
+            levelsDoc.addBallsDoc();
             random = new Random();
             maxTopcinja = 20;
             this.DoubleBuffered = true;
@@ -59,35 +60,49 @@ namespace Chain_Reaction
         }
         void timer_Tick(object sender, EventArgs e)
         {
-            if (levelsDoc.currentLevel == Levels.LEVELS.L1)
+            if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L1)
             {
                 maxTopcinja = 10;
             }
-            else if (levelsDoc.currentLevel == Levels.LEVELS.L1)
+            else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L2)
             {
                 maxTopcinja = 20;
             }
-            else if (levelsDoc.currentLevel == Levels.LEVELS.L3)
+            else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L3)
             {
                 maxTopcinja = 40;
             }
+
             if (generateBall < maxTopcinja)
             {
-                int x = random.Next(leftX+10, leftX + width-10); //leftX+10 i  leftX+width-10 zatoa sto ako se pogodi na rabot, lesno moze da izleze nadvor
-                int y = random.Next(topY+10, topY+height-10);
-                ballsDoc.AddBall(new Point(x, y));
+                int x = random.Next(leftX + 10, leftX + width - 10); //leftX+10 i  leftX+width-10 zatoa sto ako se pogodi na rabot, lesno moze da izleze nadvor
+                int y = random.Next(topY + 10, topY + height - 10);
+                levelsDoc.currentLevel.AddBall(new Point(x, y));
             }
             ++generateBall; //test
-            ballsDoc.MoveBalls(leftX, topY, width, height);
-            if (ballsDoc.hasClicked) // ako ima mouse click togas da proveruva kolizii
+
+            levelsDoc.currentLevel.MoveBalls(leftX, topY, width, height);
+            if (levelsDoc.currentLevel.hasClicked) // ako ima mouse click togas da proveruva kolizii
             {
-                if (ballsDoc.isActive())
-                    ballsDoc.checkCollisions();
+                if (levelsDoc.currentLevel.isActive())
+                    levelsDoc.currentLevel.checkCollisions();
                 else
+                {
                     timer.Stop();
+                    if (levelsDoc.daliIspolnuva())
+                    {
+                        timer.Start();
+                        generateBall = 0;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Game Over");
+                    }
+                }
+                    
             }
 
-            ballsDoc.nextLevel(); // proverka za sledno nivo
+            levelsDoc.currentLevel.nextLevel(); // proverka za sledno nivo
             Invalidate(true);
             //ne dovrseno za game over da se definira posle kolku vreme
         }
@@ -102,7 +117,7 @@ namespace Chain_Reaction
 
         private void statusStrip1_Paint(object sender, PaintEventArgs e)
         {
-            toolStripStatusLabel2.Text = string.Format("Poeni: {0}", ballsDoc.poeni());
+            toolStripStatusLabel2.Text = string.Format("Poeni: {0}", levelsDoc.currentLevel.poeni());
             toolStripStatusLabel1.Text = string.Format("Level: {0}", level);
             
         }
@@ -113,9 +128,9 @@ namespace Chain_Reaction
             Pen pen = new Pen(Color.Black, 3);
             e.Graphics.DrawRectangle(pen, leftX, topY, width, height);
             pen.Dispose();
-            ballsDoc.Draw(e.Graphics);
+            levelsDoc.currentLevel.Draw(e.Graphics);
            
-            if (ballsDoc.hasClicked) //samo ako e kliknato togas da se iscrta golemata topka
+            if (levelsDoc.currentLevel.hasClicked) //samo ako e kliknato togas da se iscrta golemata topka
             {
                 bigBall.Draw(e.Graphics);
             }
@@ -130,13 +145,13 @@ namespace Chain_Reaction
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (!ballsDoc.hasClicked)
+            if (!levelsDoc.currentLevel.hasClicked)
             {
-                ballsDoc.hasClicked = true;
+                levelsDoc.currentLevel.hasClicked = true;
                 bigBall = new BigBall(e.Location, Color.Black);
                 bigBall.isSet = true;
-                ballsDoc.bigBall = bigBall;
-                ballsDoc.bigBall.increaseRadius();
+                levelsDoc.currentLevel.bigBall = bigBall;
+                levelsDoc.currentLevel.bigBall.increaseRadius();
             }
             Invalidate(true);
             /* if (!ballsDoc.hasClicked)
