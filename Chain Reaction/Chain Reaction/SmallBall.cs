@@ -13,7 +13,7 @@ namespace Chain_Reaction
     public class SmallBall
     {
         //treba da se pojavuvaat na random lokacii
-        public static int MAX_RADIUS = 30;
+        public static int MAX_RADIUS = 35;
         public int radius; //test vrednost 
         //radiusot ne treba da im se menuva
         public Point Center { get; set; }
@@ -30,7 +30,8 @@ namespace Chain_Reaction
 
         public bool isHit { get; set; } //ako se dopiraat so golemata topka
 
-        private Stopwatch increaseTimer;
+        public int radiusCounter { get; set; } //kolku vreme pominalo otkako radiusot ja dobil maksimalnata golemina
+        public bool decreaseFlag; //stom ova e true, togas treba da se zgolemuva radiusCounter
 
         public SmallBall()
         {
@@ -43,6 +44,8 @@ namespace Chain_Reaction
             velocityX = (float)(Math.Cos(Angle) * Velocity);
             velocityY = (float)(Math.Sin(Angle) * Velocity);
             State = r.Next(3);
+            radiusCounter = 0;
+            decreaseFlag = false;
         }
 
         public void Draw(Graphics g)
@@ -118,8 +121,24 @@ namespace Chain_Reaction
             if (radius < MAX_RADIUS)
                 radius += 5;
 
+            if (radius == MAX_RADIUS)
+            {
+                radiusCounter++;
+                decreaseFlag = true;
+            }
+                
         }
-        
+
+        public void decreaseRadius()
+        {
+            if (radius > 0)
+            {
+                radius -= 5;
+            }
+            
+        }
+
+
 
         public void Move(int left, int top, int width, int height)
         {

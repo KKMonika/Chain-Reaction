@@ -35,6 +35,7 @@
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerIncrease = new System.Windows.Forms.Timer(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tbRadiusCounter = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,11 +75,19 @@
             // 
             this.timerIncrease.Tick += new System.EventHandler(this.timerIncrease_Tick);
             // 
+            // tbRadiusCounter
+            // 
+            this.tbRadiusCounter.Location = new System.Drawing.Point(679, 405);
+            this.tbRadiusCounter.Name = "tbRadiusCounter";
+            this.tbRadiusCounter.Size = new System.Drawing.Size(100, 20);
+            this.tbRadiusCounter.TabIndex = 2;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.tbRadiusCounter);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -103,6 +112,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.Timer timerIncrease;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.TextBox tbRadiusCounter;
     }
 }
 

@@ -51,9 +51,9 @@ namespace Chain_Reaction
         // ja prepraviv CheckCollisons
         public void checkCollisions()
         {
-            for(int i = 0; i < balls.Count; i++)
+            for (int i = 0; i < balls.Count; i++)
             {
-                for(int j = i+1; j < balls.Count; j++)
+                for (int j = i+1; j < balls.Count; j++)
                 { 
                     if (!balls[i].isHit && balls[i].isCollidingBig(bigBall))
                     {
@@ -72,10 +72,30 @@ namespace Chain_Reaction
                     }
                 }
             }
-            for(int i = balls.Count - 1; i >= 0; i--)
+
+            for (int i = balls.Count - 1; i >= 0; i--)
             {
-                if (balls[i].isHit)
+                if (balls[i].isHit && !balls[i].decreaseFlag) //ako e pogodeno topceto, zgolemuvaj mu go radiusot
+                {
                     balls[i].increaseRadius();
+                }
+
+                if (balls[i].radius == SmallBall.MAX_RADIUS) //ova znaci deka vekje stanalo golemo topceto
+                {
+                    balls[i].radiusCounter++;
+                    balls[i].decreaseFlag = true;
+                }
+
+                if (balls[i].radiusCounter > 30) //ako vekje podolgo vreme topceto e golemo, vreme e da pocne da se namulva
+                {
+                    balls[i].decreaseRadius();
+                }
+
+                if (balls[i].radius <= 0) //ako radiusot mu e 0 ili pomal, znaci deka treba da se otstrani od listata
+                {
+                    balls.RemoveAt(i);
+                }
+
             }
         }
         public void nextLevel()

@@ -64,11 +64,12 @@ namespace Chain_Reaction
             }
             ++generateBall; //test
             ballsDoc.MoveBalls(leftX, topY, width, height);
-            if(ballsDoc.hasClicked) // ako ima mouse click togas da proveruva kolizii
+            if (ballsDoc.hasClicked) // ako ima mouse click togas da proveruva kolizii
+            {
                 ballsDoc.checkCollisions();
+            }
 
             ballsDoc.nextLevel(); // proverka za sledno nivo
-
             Invalidate(true);
             //ne dovrseno za game over da se definira posle kolku vreme
         }
