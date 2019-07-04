@@ -91,18 +91,45 @@ namespace Chain_Reaction
                     balls[i].decreaseRadius();
                 }
 
-                if (balls[i].radius <= 0) //ako radiusot mu e 0 ili pomal, znaci deka treba da se otstrani od listata
+                if (balls[i].radius <= 0) //ako radiusot mu e 0 ili pomal, znaci deka treba da se otstrani od listata, inaku i so radius 1/0 moze da ima collision so drugo topce
                 {
                     balls.RemoveAt(i);
                 }
 
             }
+
+
+            //Istata logika kako pogore, samo primeneta nad bigBall
+            if (bigBall != null)
+            {
+                if (!bigBall.decreaseFlag)
+                {
+                    bigBall.increaseRadius();
+                }
+
+                if (bigBall.RADIUS == BigBall.MAX_RADIUS)
+                {
+                    bigBall.radiusCounter++;
+                    bigBall.decreaseFlag = true;
+                }
+
+                if (bigBall.radiusCounter > 30)
+                {
+                    bigBall.decreaseRadius();
+                }
+
+                if (bigBall.RADIUS <= 0)
+                {
+                    bigBall = null;
+                }
+            }
+            
         }
         public void nextLevel()
         {
             if(count == 10)
             {
-                bigBall.changeRadius();
+                //bigBall.changeRadius();
             }
         }
         public int poeni()

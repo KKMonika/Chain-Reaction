@@ -88,8 +88,13 @@ namespace Chain_Reaction
 
         public bool isCollidingBig(BigBall bigBall)
         {
-            double distanceBigBall = (Center.X - bigBall.Center.X) * (Center.X - bigBall.Center.X) + (Center.Y - bigBall.Center.Y) * (Center.Y - bigBall.Center.Y);
-            return distanceBigBall <= (radius + bigBall.RADIUS) * (radius + bigBall.RADIUS);
+            if (bigBall != null)
+            {
+                double distanceBigBall = (Center.X - bigBall.Center.X) * (Center.X - bigBall.Center.X) + (Center.Y - bigBall.Center.Y) * (Center.Y - bigBall.Center.Y);
+                return distanceBigBall <= (radius + bigBall.RADIUS) * (radius + bigBall.RADIUS);
+            }
+            else
+                return false;
         }
 
         public bool isCollidingSmall(SmallBall smallBall)

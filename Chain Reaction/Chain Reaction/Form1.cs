@@ -117,6 +117,7 @@ namespace Chain_Reaction
                 bigBall = new BigBall(e.Location, Color.Black);
                 bigBall.isSet = true;
                 ballsDoc.bigBall = bigBall;
+                ballsDoc.bigBall.increaseRadius();
             }
             Invalidate(true);
             /* if (!ballsDoc.hasClicked)
@@ -180,9 +181,9 @@ namespace Chain_Reaction
             }
         }
 
-        private void timerIncrease_Tick(object sender, EventArgs e)
+        /*private void timerIncrease_Tick(object sender, EventArgs e)
         {
 
-        }
+        }*/
     }
 }
