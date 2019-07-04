@@ -18,8 +18,7 @@ namespace Chain_Reaction
         public bool isOpened { get; set; }
         BallsDoc ballsDoc; //treba da se pojavuvaat po odredena postignata vrednost na Radiusot na bigBall
         BigBall bigBall; //treba da se pojavuva na klik
-       // SmallBall firstBall;
-        int maxTopcinja;
+        public int maxTopcinja { get; set; }
         Color currentColor;
 
         Timer timer;
@@ -31,13 +30,14 @@ namespace Chain_Reaction
         private int generateBall = 0;
         int level; // level
         Random random;
+        Levels levelsDoc;
 
         private String FileName; //za serijalizacija
         public Form1()
         {
             InitializeComponent();
-            ballsDoc = new BallsDoc(); //treba da se doraboti
-            
+            //ballsDoc = new BallsDoc(); //treba da se doraboti
+            levelsDoc = new Levels();
             random = new Random();
             maxTopcinja = 20;
             this.DoubleBuffered = true;
@@ -59,6 +59,18 @@ namespace Chain_Reaction
         }
         void timer_Tick(object sender, EventArgs e)
         {
+            if (levelsDoc.currentLevel == Levels.LEVELS.L1)
+            {
+                maxTopcinja = 10;
+            }
+            else if (levelsDoc.currentLevel == Levels.LEVELS.L1)
+            {
+                maxTopcinja = 20;
+            }
+            else if (levelsDoc.currentLevel == Levels.LEVELS.L3)
+            {
+                maxTopcinja = 40;
+            }
             if (generateBall < maxTopcinja)
             {
                 int x = random.Next(leftX+10, leftX + width-10); //leftX+10 i  leftX+width-10 zatoa sto ako se pogodi na rabot, lesno moze da izleze nadvor

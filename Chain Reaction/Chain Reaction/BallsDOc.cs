@@ -10,18 +10,25 @@ namespace Chain_Reaction
     [Serializable]
     public class BallsDoc
     {
+        public enum LEVELS
+        {
+            L1,
+            L2,
+            L3
+        }
         public List<SmallBall> balls { get; set; }
         public BigBall bigBall { get; set; }
-
-        int count=0;
+        public int count { get; set; } //kolku topcinja se pogodeni
+        public int needToHit { get; set; } // kolku topcinja treba da se pogodat za da bide pominato nivoto
         bool levelChange = false; // dali da se smeni levelot
-        int currentLevel = 1;
+        public LEVELS currentLevel;
         public bool hasClicked { get; set; }  //se menuva vo true samo pri klik na pocetokot vo formata, posle toa pri sekoj sleden klik nema da se kreira novo topce
         public BallsDoc()
         {
+            
             hasClicked = false;
             balls = new List<SmallBall>();
-            
+            count = 0;
         }
 
         public void Draw(Graphics g)
@@ -74,11 +81,13 @@ namespace Chain_Reaction
 
                     else if (balls[i].isCollidingSmall(balls[j]) && balls[i].isHit && !balls[j].isHit)
                     {
+                        count++;
                         balls[j].isHit = true;
                     }
 
                     else if (balls[j].isCollidingSmall(balls[i]) && balls[j].isHit && !balls[i].isHit)
                     {
+                        count++;
                         balls[i].isHit = true;
                     }
                 }
@@ -147,19 +156,9 @@ namespace Chain_Reaction
         {
             return count * 1000;
         }
-        public int CurrentLevel()
-        {
-            if(poeni() == 10000)
-            {
-                currentLevel = 2;
-            }
-            if(poeni() == 500000)
-            {
-                currentLevel = 3;
-            }
-            return currentLevel;
 
-        }
+
+        
 
        
     }
