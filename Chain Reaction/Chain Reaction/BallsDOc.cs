@@ -48,6 +48,17 @@ namespace Chain_Reaction
             }
         }
 
+        public bool isActive() //ako nema aktivni/zgolemeni topcinja, da prestane move
+        {
+            foreach(SmallBall ball in balls)
+            {
+                if (ball.isHit)
+                    return true;
+            }
+            //ako foreach ne vratil true, znaci nema aktivni mali topcinja
+            return bigBall != null; //edinstvena proverka ostanata e dali bigBall e aktivna
+        }
+
         // ja prepraviv CheckCollisons
         public void checkCollisions()
         {

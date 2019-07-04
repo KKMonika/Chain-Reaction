@@ -66,7 +66,10 @@ namespace Chain_Reaction
             ballsDoc.MoveBalls(leftX, topY, width, height);
             if (ballsDoc.hasClicked) // ako ima mouse click togas da proveruva kolizii
             {
-                ballsDoc.checkCollisions();
+                if (ballsDoc.isActive())
+                    ballsDoc.checkCollisions();
+                else
+                    timer.Stop();
             }
 
             ballsDoc.nextLevel(); // proverka za sledno nivo
