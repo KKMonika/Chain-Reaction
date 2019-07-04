@@ -15,6 +15,7 @@ namespace Chain_Reaction
 {
     public partial class Form1 : Form
     {
+        public bool isOpened { get; set; }
         BallsDoc ballsDoc; //treba da se pojavuvaat po odredena postignata vrednost na Radiusot na bigBall
         BigBall bigBall; //treba da se pojavuva na klik
        // SmallBall firstBall;
@@ -51,6 +52,8 @@ namespace Chain_Reaction
             height = this.Height - (int)(2.5 * topY);
 
             level = 1;
+
+            isOpened = true;
            
 
         }
@@ -81,6 +84,7 @@ namespace Chain_Reaction
 
         private void Form1_Load(object sender, EventArgs e)
         {
+           
 
         }
 
@@ -182,6 +186,12 @@ namespace Chain_Reaction
                 }
                 Invalidate(true);
             }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            isOpened = false;
+
         }
 
         /*private void timerIncrease_Tick(object sender, EventArgs e)
