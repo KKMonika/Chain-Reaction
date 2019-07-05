@@ -30,7 +30,7 @@ namespace Chain_Reaction
         public bool custom { get; set; } //flag to know if level is custom
         public Levels levelsDoc { get; set; }
 
-        EnterHighScore enterHighScoreForm;
+        //EnterHighScore enterHighScoreForm;
         public HighScores highScores { get; }
         
         public Form1(bool custom)
@@ -49,21 +49,7 @@ namespace Chain_Reaction
             width = this.Width - (3 * leftX);
             height = this.Height - (int)(2.5 * topY);
             isOpened = true;
-            enterHighScoreForm = new EnterHighScore();
             highScores = new HighScores();
-        }
-       
-
-        private void enterScore()
-        {
-            int points = levelsDoc.poeniOdSiteNivoa();
-            if (enterHighScoreForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                HighScoreItem highScoreItem = new HighScoreItem();
-                highScoreItem.player = enterHighScoreForm.PlayerName;
-                highScoreItem.points = levelsDoc.poeniOdSiteNivoa();
-                highScores.add(highScoreItem);
-            }
         }
 
         void timer_Tick(object sender, EventArgs e)
