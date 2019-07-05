@@ -36,6 +36,8 @@
             this.label19 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -52,13 +54,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
             this.InstructionsPanel = new System.Windows.Forms.Panel();
+            this.btnGoBack = new System.Windows.Forms.Button();
             this.label20 = new System.Windows.Forms.Label();
             this.lblInstructions = new System.Windows.Forms.Label();
-            this.btnGoBack = new System.Windows.Forms.Button();
             this.HighScoresPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.MainPanel.SuspendLayout();
@@ -139,7 +139,6 @@
             this.btnClear.TabIndex = 11;
             this.btnClear.Text = "Clear scores";
             this.btnClear.UseVisualStyleBackColor = true;
-            //this.btnClear.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnBack
             // 
@@ -150,6 +149,26 @@
             this.btnBack.Text = "Go back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.label3.Location = new System.Drawing.Point(428, 39);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 22);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Points:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
+            this.label2.Location = new System.Drawing.Point(260, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(62, 22);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Name:";
             // 
             // panel1
             // 
@@ -298,26 +317,6 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "1.";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.label3.Location = new System.Drawing.Point(428, 39);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 22);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Points:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.25F);
-            this.label2.Location = new System.Drawing.Point(260, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 22);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Name:";
-            // 
             // MainPanel
             // 
             this.MainPanel.Controls.Add(this.label1);
@@ -340,6 +339,16 @@
             this.InstructionsPanel.Size = new System.Drawing.Size(770, 430);
             this.InstructionsPanel.TabIndex = 6;
             // 
+            // btnGoBack
+            // 
+            this.btnGoBack.Location = new System.Drawing.Point(308, 365);
+            this.btnGoBack.Name = "btnGoBack";
+            this.btnGoBack.Size = new System.Drawing.Size(162, 40);
+            this.btnGoBack.TabIndex = 2;
+            this.btnGoBack.Text = "Go back";
+            this.btnGoBack.UseVisualStyleBackColor = true;
+            this.btnGoBack.Click += new System.EventHandler(this.btnGoBack_Click);
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -355,31 +364,21 @@
             // 
             this.lblInstructions.AutoSize = true;
             this.lblInstructions.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInstructions.Location = new System.Drawing.Point(16, 115);
+            this.lblInstructions.Location = new System.Drawing.Point(53, 117);
             this.lblInstructions.Name = "lblInstructions";
             this.lblInstructions.Size = new System.Drawing.Size(32, 18);
             this.lblInstructions.TabIndex = 1;
             this.lblInstructions.Text = "Info";
             this.lblInstructions.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // btnGoBack
-            // 
-            this.btnGoBack.Location = new System.Drawing.Point(308, 365);
-            this.btnGoBack.Name = "btnGoBack";
-            this.btnGoBack.Size = new System.Drawing.Size(162, 40);
-            this.btnGoBack.TabIndex = 2;
-            this.btnGoBack.Text = "Go back";
-            this.btnGoBack.UseVisualStyleBackColor = true;
-            this.btnGoBack.Click += new System.EventHandler(this.btnGoBack_Click);
-            // 
             // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.InstructionsPanel);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.HighScoresPanel);
-            this.Controls.Add(this.InstructionsPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainPage";
             this.Text = "MainPage";

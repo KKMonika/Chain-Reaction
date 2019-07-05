@@ -60,6 +60,8 @@ namespace Chain_Reaction
                 nivo.currentLevel = BallsDoc.LEVELS.L7;
             else if (nivoa.ElementAt(nivoa.Count - 1).currentLevel == BallsDoc.LEVELS.L7)
                 nivo.currentLevel = BallsDoc.LEVELS.NA;
+            else
+                return;
 
             nivoa.Add(nivo);
             currentLevel = nivo;
@@ -75,6 +77,7 @@ namespace Chain_Reaction
             }
             else if (currentLevel.count >= currentLevel.needToHit() && (currentLevel.currentLevel == BallsDoc.LEVELS.CUSTOM || currentLevel.currentLevel == BallsDoc.LEVELS.L7))
             {
+                changeLevel();
                 return true;
             }
             else

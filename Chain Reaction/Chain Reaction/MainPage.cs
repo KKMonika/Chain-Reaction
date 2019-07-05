@@ -48,12 +48,11 @@ namespace Chain_Reaction
             {
                 this.Text = "Instructions";
                 lblInstructions.Text =
-                    string.Format("The objective of the game is to cause a chain reaction among the balls on the screen\n" +
+                    string.Format("The objective of the game is to cause a chain reaction among the balls on the screen.\n" +
                     "On each level you have a number of balls that need to be expanded in order to pass the level.\n" +
-                    "In order to save your score, you have to pass all 7 levels, and add it on the leaderboard.\n" +
                     "On the main page, you also have the option to play a custom game where you can adjust the number\n" +
                     "of balls that appear on the screen and the number of balls needed to expand to pass the level.\n" +
-                    "The scores from the custom game cannot be saved, because that mode is intended only for fun and practicing.\n" +
+                    "The custom game mode is intended only for fun and practicing.\n" +
                     "Good luck and let the games begin!");
                 
                 MainPanel.Visible = false;
@@ -62,10 +61,6 @@ namespace Chain_Reaction
 
             }
             
-            else
-            {
-                MessageBox.Show("Ova uste ne e implementirano");
-            }
         }
         
 

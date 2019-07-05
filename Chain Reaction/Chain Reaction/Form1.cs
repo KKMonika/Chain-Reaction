@@ -84,8 +84,13 @@ namespace Chain_Reaction
                         }
                         else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.NA || levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.CUSTOM)
                         {
-                            MessageBox.Show(string.Format("Congratulations, you won {0} points!", levelsDoc.poeniOdSiteNivoa().ToString()));
-                        }
+                            //MessageBox.Show(string.Format("Congratulations, you won {0} points!", levelsDoc.poeniOdSiteNivoa().ToString()),"Congratulations!");
+                            if (MessageBox.Show("Restart game?", string.Format("Congratulations, you won {0} points!", levelsDoc.poeniOdSiteNivoa().ToString()), MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                            {
+                                restartToolStripMenuItem_Click(sender, e);
+                            }
+                            
+                         }
                         lblNeedToExpand.Text = levelsDoc.currentLevel.needToHit().ToString();
                         lblMaxBalls.Text = levelsDoc.currentLevel.maxBalls().ToString();
                         lblLevel.Text = string.Format("Level: {0}", levelsDoc.getLevel().ToString());
