@@ -29,21 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backToMainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.highScoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblNeedToExpand = new System.Windows.Forms.Label();
+            this.lblMaxBalls = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblExpanded = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // statusStrip1
             // 
@@ -69,15 +72,115 @@
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(47, 17);
             this.toolStripStatusLabel2.Text = "poenilb";
             // 
+            // menuStrip2
+            // 
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.backToMainToolStripMenuItem,
+            this.restartToolStripMenuItem,
+            this.saveGameToolStripMenuItem,
+            this.openGameToolStripMenuItem,
+            this.highScoresToolStripMenuItem});
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip2.TabIndex = 2;
+            this.menuStrip2.Text = "menuStrip2";
+            // 
+            // restartToolStripMenuItem
+            // 
+            this.restartToolStripMenuItem.Name = "restartToolStripMenuItem";
+            this.restartToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.restartToolStripMenuItem.Text = "Restart";
+            // 
+            // saveGameToolStripMenuItem
+            // 
+            this.saveGameToolStripMenuItem.Name = "saveGameToolStripMenuItem";
+            this.saveGameToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.saveGameToolStripMenuItem.Text = "Save Game";
+            // 
+            // openGameToolStripMenuItem
+            // 
+            this.openGameToolStripMenuItem.Name = "openGameToolStripMenuItem";
+            this.openGameToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
+            this.openGameToolStripMenuItem.Text = "Open Game";
+            // 
+            // backToMainToolStripMenuItem
+            // 
+            this.backToMainToolStripMenuItem.Name = "backToMainToolStripMenuItem";
+            this.backToMainToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
+            this.backToMainToolStripMenuItem.Text = "Back to Main";
+            // 
+            // highScoresToolStripMenuItem
+            // 
+            this.highScoresToolStripMenuItem.Name = "highScoresToolStripMenuItem";
+            this.highScoresToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
+            this.highScoresToolStripMenuItem.Text = "High Scores";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(16, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(110, 16);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Need to expand: ";
+            // 
+            // lblNeedToExpand
+            // 
+            this.lblNeedToExpand.AutoSize = true;
+            this.lblNeedToExpand.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNeedToExpand.Location = new System.Drawing.Point(124, 33);
+            this.lblNeedToExpand.Name = "lblNeedToExpand";
+            this.lblNeedToExpand.Size = new System.Drawing.Size(15, 16);
+            this.lblNeedToExpand.TabIndex = 4;
+            this.lblNeedToExpand.Text = "0";
+            this.lblNeedToExpand.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // lblMaxBalls
+            // 
+            this.lblMaxBalls.AutoSize = true;
+            this.lblMaxBalls.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaxBalls.Location = new System.Drawing.Point(222, 33);
+            this.lblMaxBalls.Name = "lblMaxBalls";
+            this.lblMaxBalls.Size = new System.Drawing.Size(15, 16);
+            this.lblMaxBalls.TabIndex = 6;
+            this.lblMaxBalls.Text = "0";
+            this.lblMaxBalls.Click += new System.EventHandler(this.label2_Click_1);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(145, 33);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(75, 16);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "balls out of:";
+            // 
+            // lblExpanded
+            // 
+            this.lblExpanded.AutoSize = true;
+            this.lblExpanded.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblExpanded.Location = new System.Drawing.Point(633, 33);
+            this.lblExpanded.Name = "lblExpanded";
+            this.lblExpanded.Size = new System.Drawing.Size(119, 16);
+            this.lblExpanded.TabIndex = 7;
+            this.lblExpanded.Text = "Expanded so far: 0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblExpanded);
+            this.Controls.Add(this.lblMaxBalls);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblNeedToExpand);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menuStrip2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
@@ -86,18 +189,29 @@
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem backToMainToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem restartToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveGameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openGameToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem highScoresToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblNeedToExpand;
+        private System.Windows.Forms.Label lblMaxBalls;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblExpanded;
     }
 }
 

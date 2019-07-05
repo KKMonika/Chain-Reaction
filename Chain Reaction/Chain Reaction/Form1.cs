@@ -18,7 +18,7 @@ namespace Chain_Reaction
         public bool isOpened { get; set; }
         BallsDoc ballsDoc; //treba da se pojavuvaat po odredena postignata vrednost na Radiusot na bigBall
         BigBall bigBall; //treba da se pojavuva na klik
-        public int maxTopcinja { get; set; }
+        //public int maxTopcinja { get; set; }
         Color currentColor;
 
         Timer timer;
@@ -28,7 +28,6 @@ namespace Chain_Reaction
         int height;
 
         private int generateBall = 0;
-        int level; // level
         Random random;
         Levels levelsDoc;
 
@@ -40,7 +39,7 @@ namespace Chain_Reaction
             levelsDoc = new Levels();
             levelsDoc.addBallsDoc();
             random = new Random();
-            maxTopcinja = 20;
+            //maxTopcinja = 10;
             this.DoubleBuffered = true;
             currentColor = Color.Red; // pokasno da se napravi da se bira boja
             timer = new Timer();
@@ -51,47 +50,59 @@ namespace Chain_Reaction
             topY = 60; //test vrednosti predlog za cela forma 816:489
             width = this.Width - (3 * leftX);
             height = this.Height - (int)(2.5 * topY);
-
-            level = 1;
-
             isOpened = true;
-           
-
         }
+
+
+
         void timer_Tick(object sender, EventArgs e)
         {
-            if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L1)
+            /*if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L1)
             {
                 maxTopcinja = 10;
             }
             else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L2)
             {
-                maxTopcinja = 20;
+                maxTopcinja = 15;
             }
             else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L3)
             {
-                maxTopcinja = 40;
+                maxTopcinja = 20;
             }
+            else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L4)
+            {
+                maxTopcinja = 25;
+            }
+            else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L5)
+            {
+                maxTopcinja = 30;
+            }*/
 
-            if (generateBall < maxTopcinja)
+            if (generateBall < levelsDoc.currentLevel.maxBalls())
             {
                 int x = random.Next(leftX + 10, leftX + width - 10); //leftX+10 i  leftX+width-10 zatoa sto ako se pogodi na rabot, lesno moze da izleze nadvor
                 int y = random.Next(topY + 10, topY + height - 10);
                 levelsDoc.currentLevel.AddBall(new Point(x, y));
+                ++generateBall;
             }
-            ++generateBall; //test
 
             levelsDoc.currentLevel.MoveBalls(leftX, topY, width, height);
             if (levelsDoc.currentLevel.hasClicked) // ako ima mouse click togas da proveruva kolizii
             {
                 if (levelsDoc.currentLevel.isActive())
+                {
                     levelsDoc.currentLevel.checkCollisions();
+                    lblExpanded.Text = String.Format("Expanded so far: {0}", levelsDoc.currentLevel.count);
+                }
+                    
                 else
                 {
                     timer.Stop();
                     if (levelsDoc.daliIspolnuva())
                     {
                         timer.Start();
+                        lblNeedToExpand.Text = levelsDoc.currentLevel.needToHit().ToString();
+                        lblMaxBalls.Text = levelsDoc.currentLevel.maxBalls().ToString();
                         generateBall = 0;
                     }
                     else
@@ -101,8 +112,7 @@ namespace Chain_Reaction
                 }
                     
             }
-
-            levelsDoc.currentLevel.nextLevel(); // proverka za sledno nivo
+            
             Invalidate(true);
             //ne dovrseno za game over da se definira posle kolku vreme
         }
@@ -111,20 +121,19 @@ namespace Chain_Reaction
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
-
+            lblNeedToExpand.Text = levelsDoc.currentLevel.needToHit().ToString();
+            lblMaxBalls.Text = levelsDoc.currentLevel.maxBalls().ToString();
         }
 
         private void statusStrip1_Paint(object sender, PaintEventArgs e)
         {
-            toolStripStatusLabel2.Text = string.Format("Poeni: {0}", levelsDoc.currentLevel.poeni());
-            toolStripStatusLabel1.Text = string.Format("Level: {0}", level);
-            
+            toolStripStatusLabel1.Text = string.Format("Level {0}", levelsDoc.getLevel());
+            toolStripStatusLabel2.Text = string.Format("Total points: {0}", levelsDoc.poeniOdSiteNivoa());
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.Clear(Color.White);
+            e.Graphics.Clear(SystemColors.Control);
             Pen pen = new Pen(Color.Black, 3);
             e.Graphics.DrawRectangle(pen, leftX, topY, width, height);
             pen.Dispose();
@@ -154,17 +163,6 @@ namespace Chain_Reaction
                 levelsDoc.currentLevel.bigBall.increaseRadius();
             }
             Invalidate(true);
-            /* if (!ballsDoc.hasClicked)
-             {
-                 ballsDoc.hasClicked = true;
-                 firstBall = new SmallBall();
-                 firstBall.State = 3;
-                 firstBall.bigBall = true;
-                 flag = true;
-                 //ballsDoc.AddBall(e.Location);
-             }
-             Invalidate();
-             */
         }
         
 
@@ -173,8 +171,8 @@ namespace Chain_Reaction
             if (FileName == null)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "Balls doc file (*.bll)|*.bll";
-                saveFileDialog.Title = "Save balls doc";
+                saveFileDialog.Filter = "ChainReaction file (*.crf)|*.crf";
+                saveFileDialog.Title = "ChainReaction file";
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     FileName = saveFileDialog.FileName;
@@ -192,8 +190,8 @@ namespace Chain_Reaction
         private void openFile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Polygons balls file (*.bll)|*.bll";
-            openFileDialog.Title = "Open balls doc file";
+            openFileDialog.Filter = "ChainReaction file (*.crf)|*.crf";
+            openFileDialog.Title = "ChainReaction file";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 FileName = openFileDialog.FileName;
@@ -218,6 +216,20 @@ namespace Chain_Reaction
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             isOpened = false;
+        }
+
+        private void toolStripStatusLabel3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
+        {
 
         }
 

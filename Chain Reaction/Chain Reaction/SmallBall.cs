@@ -33,6 +33,8 @@ namespace Chain_Reaction
         public int radiusCounter { get; set; } //kolku vreme pominalo otkako radiusot ja dobil maksimalnata golemina
         public bool decreaseFlag; //stom ova e true, togas treba da se zgolemuva radiusCounter
 
+        public int Points { get; set; } //poen za edno topce
+
         public SmallBall()
         {
             isHit = false;
@@ -48,7 +50,7 @@ namespace Chain_Reaction
             decreaseFlag = false;
         }
 
-        public void Draw(Graphics g)
+        public void Draw(Graphics g, Font font)
         {
             if (State == 0)
             {
@@ -67,16 +69,22 @@ namespace Chain_Reaction
                 Color = Color.Black;
             }
             Brush b = new SolidBrush(Color);
+            Brush fb = new SolidBrush(Color.White);
             g.FillEllipse(b, Center.X - radius, Center.Y - radius, radius * 2, radius * 2);
+            if(isHit)
+            {
+                g.DrawString(string.Format("+{0}", Points), font, fb, Center.X , Center.Y );
+            }
+            fb.Dispose();
             b.Dispose();
         }
 
-        public void DrawFirst(Graphics g)
+        /*public void DrawFirst(Graphics g)
         {
             Brush b = new SolidBrush(Color.Black);
             g.FillEllipse(b, Center.X - radius, Center.Y - radius, radius * 2, radius * 2);
             b.Dispose();
-        }
+        }*/
 
         /*public bool isColliding(SmallBall ball)
         {
@@ -105,24 +113,6 @@ namespace Chain_Reaction
 
         public void increaseRadius()
         {
-            /*increaseTimer = new Stopwatch();
-            increaseTimer.Start();
-            bool flag = false;
-            while(!flag)
-            {
-                if(increaseTimer.ElapsedMilliseconds % 100 == 0 && increaseTimer.ElapsedMilliseconds < 1000) //na sekoja sekunda raste radiusot na krugot
-                {
-                    radius += 2;
-                }
-
-                if(increaseTimer.ElapsedMilliseconds > 10000)
-                {
-                    flag = true;
-                }
-            }
-            increaseTimer.Stop();
-            return true;*/
-
             if (radius < MAX_RADIUS)
                 radius += 5;
 
@@ -131,7 +121,6 @@ namespace Chain_Reaction
                 radiusCounter++;
                 decreaseFlag = true;
             }
-                
         }
 
         public void decreaseRadius()

@@ -14,28 +14,34 @@ namespace Chain_Reaction
         {
             L1,
             L2,
-            L3
+            L3,
+            L4,
+            L5,
+            L6,
+            L7
         }
         public List<SmallBall> balls { get; set; }
         public BigBall bigBall { get; set; }
         public int count { get; set; } //kolku topcinja se pogodeni
        // public int needToHit { get; set; } // kolku topcinja treba da se pogodat za da bide pominato nivoto
-        bool levelChange = false; // dali da se smeni levelot
         public LEVELS currentLevel;
         public bool hasClicked { get; set; }  //se menuva vo true samo pri klik na pocetokot vo formata, posle toa pri sekoj sleden klik nema da se kreira novo topce
+        public int poeniOdTekovnoNivo;
+        private Font font;
         public BallsDoc()
         {
-            
             hasClicked = false;
             balls = new List<SmallBall>();
             count = 0;
+            poeniOdTekovnoNivo = 0;
+            font = new Font("Ariel", 10);
         }
 
         public void Draw(Graphics g)
         {
             foreach(SmallBall ball in balls)
             {
-                ball.Draw(g);
+                ball.Draw(g, font);
             }
             
         }
@@ -77,18 +83,32 @@ namespace Chain_Reaction
                     {
                         count++;
                         balls[i].isHit = true;
+                        balls[i].Points = 100;
+                        poeniOdTekovnoNivo += balls[i].Points;
+                    }
+
+                    if (!balls[j].isHit && balls[j].isCollidingBig(bigBall))
+                    {
+                        count++;
+                        balls[j].isHit = true;
+                        balls[j].Points = 100;
+                        poeniOdTekovnoNivo += balls[j].Points;
                     }
 
                     else if (balls[i].isCollidingSmall(balls[j]) && balls[i].isHit && !balls[j].isHit)
                     {
                         count++;
                         balls[j].isHit = true;
+                        balls[j].Points = balls[i].Points * 2;
+                        poeniOdTekovnoNivo += balls[j].Points;
                     }
 
                     else if (balls[j].isCollidingSmall(balls[i]) && balls[j].isHit && !balls[i].isHit)
                     {
                         count++;
                         balls[i].isHit = true;
+                        balls[i].Points = balls[j].Points * 2;
+                        poeniOdTekovnoNivo += balls[i].Points;
                     }
                 }
             }
@@ -145,26 +165,64 @@ namespace Chain_Reaction
             }
             
         }
-        public void nextLevel()
+
+        /*public int poeniOdTekovnoNivo()
         {
-            if(count == 10)
+            int sum = 0;
+            foreach(SmallBall s in balls)
             {
-                //bigBall.changeRadius();
+                if (s.isHit)
+                    sum += s.Points;
             }
-        }
-        public int poeni()
+            return sum;
+        }*/
+
+        public int needToHit()
         {
-            return count * 1000;
+            switch (currentLevel)
+            {
+                case LEVELS.L1:
+                    return 3;
+                case LEVELS.L2:
+                    return 5;
+                case LEVELS.L3:
+                    return 10;
+                case LEVELS.L4:
+                    return 13;
+                case LEVELS.L5:
+                    return 18;
+                case LEVELS.L6:
+                    return 27;
+                case LEVELS.L7:
+                    return 32;
+                default:
+                    return 0;
+            }
+
         }
 
-        public int needToHit() {
-            if (currentLevel == LEVELS.L1)
+        public int maxBalls()
+        {
+            switch (currentLevel)
             {
-                return 3;
+                case LEVELS.L1:
+                    return 10;
+                case LEVELS.L2:
+                    return 15;
+                case LEVELS.L3:
+                    return 20;
+                case LEVELS.L4:
+                    return 25;
+                case LEVELS.L5:
+                    return 30;
+                case LEVELS.L6:
+                    return 35;
+                case LEVELS.L7:
+                    return 40;
+                default:
+                    return 0;
             }
-            else if (currentLevel == LEVELS.L2) return 5;
-           else  return 15;
-            }
+        }
       
 
 

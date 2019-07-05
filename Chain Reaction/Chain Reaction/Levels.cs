@@ -8,14 +8,7 @@ namespace Chain_Reaction
 {
     [Serializable]
     public class Levels
-    {
-        /*public enum LEVELS
-        {
-            L1,
-            L2,
-            L3
-        }*/
-        
+    {        
         public List<BallsDoc> nivoa;
         public BallsDoc currentLevel;
 
@@ -39,6 +32,14 @@ namespace Chain_Reaction
                 nivo.currentLevel = BallsDoc.LEVELS.L2;
             else if (nivoa.ElementAt(nivoa.Count - 1).currentLevel == BallsDoc.LEVELS.L2)
                 nivo.currentLevel = BallsDoc.LEVELS.L3;
+            else if (nivoa.ElementAt(nivoa.Count - 1).currentLevel == BallsDoc.LEVELS.L3)
+                nivo.currentLevel = BallsDoc.LEVELS.L4;
+            else if (nivoa.ElementAt(nivoa.Count - 1).currentLevel == BallsDoc.LEVELS.L4)
+                nivo.currentLevel = BallsDoc.LEVELS.L5;
+            else if (nivoa.ElementAt(nivoa.Count - 1).currentLevel == BallsDoc.LEVELS.L5)
+                nivo.currentLevel = BallsDoc.LEVELS.L6;
+            else if (nivoa.ElementAt(nivoa.Count - 1).currentLevel == BallsDoc.LEVELS.L6)
+                nivo.currentLevel = BallsDoc.LEVELS.L7;
 
             nivoa.Add(nivo);
             currentLevel = nivo;
@@ -46,26 +47,47 @@ namespace Chain_Reaction
 
         public bool daliIspolnuva()
         {
-            if (currentLevel.currentLevel == BallsDoc.LEVELS.L1 && currentLevel.count >= currentLevel.needToHit())
+            if (currentLevel.count >= currentLevel.needToHit())
             {
                 changeLevel();
                 return true;
             }
-            else if (currentLevel.currentLevel == BallsDoc.LEVELS.L2 && currentLevel.count >= currentLevel.needToHit())
-            {
-                changeLevel();
-                return true;
-            }
-            else if (currentLevel.currentLevel == BallsDoc.LEVELS.L3 && currentLevel.count >= currentLevel.needToHit())
-            {
-                changeLevel();
-                return true;
-            }
-            else return false;
+            else
+                return false;
         }
 
+        public int poeniOdSiteNivoa()
+        {
+            int sum = 0;
+            foreach(BallsDoc nivo in nivoa)
+            {
+                sum += nivo.poeniOdTekovnoNivo;
+            }
+            return sum;
+        }
 
-        
+        public int getLevel()
+        {
+            switch(currentLevel.currentLevel)
+            {
+                case BallsDoc.LEVELS.L1:
+                    return 1;
+                case BallsDoc.LEVELS.L2:
+                    return 2;
+                case BallsDoc.LEVELS.L3:
+                    return 3;
+                case BallsDoc.LEVELS.L4:
+                    return 4;
+                case BallsDoc.LEVELS.L5:
+                    return 5;
+                case BallsDoc.LEVELS.L6:
+                    return 6;
+                case BallsDoc.LEVELS.L7:
+                    return 7;
+                default:
+                    return 0;
+            }
+        }
 
 
 
