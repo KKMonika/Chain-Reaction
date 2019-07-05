@@ -14,11 +14,9 @@ namespace Chain_Reaction
     {
         //treba da se pojavuvaat na random lokacii
         public static int MAX_RADIUS = 35;
-        public int radius; //test vrednost 
-        //radiusot ne treba da im se menuva
+        public int radius; 
         public Point Center { get; set; }
         public Color Color { get; set; } //predlog da se naprajt sekoe so razlicna boja
-        public int State { get; set; } //za koja boja ke bide topceto, ke se dodeluva so random vrednost
 
         public double Angle { get; set; } //za vo koja nasoka ke se dvizi topceto
         public double Velocity {get; set;} //so koja brzina ke se dvizi
@@ -45,29 +43,13 @@ namespace Chain_Reaction
             Angle = r.NextDouble() * 2 * Math.PI;
             velocityX = (float)(Math.Cos(Angle) * Velocity);
             velocityY = (float)(Math.Sin(Angle) * Velocity);
-            State = r.Next(3);
             radiusCounter = 0;
             decreaseFlag = false;
+            Color = Color.FromArgb(r.Next(256), r.Next(256), r.Next(256));
         }
 
         public void Draw(Graphics g, Font font)
         {
-            if (State == 0)
-            {
-                Color = Color.Green;
-            }
-            else if (State == 1)
-            {
-                Color = Color.Blue;
-            }
-            else if (State == 2)
-            {
-                Color = Color.Red;
-            }
-            else
-            {
-                Color = Color.Black;
-            }
             Brush b = new SolidBrush(Color);
             Brush fb = new SolidBrush(Color.White);
             g.FillEllipse(b, Center.X - radius, Center.Y - radius, radius * 2, radius * 2);

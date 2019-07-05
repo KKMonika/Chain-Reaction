@@ -21,6 +21,10 @@ namespace Chain_Reaction
         public void Restart(bool custom)
         {
             nivoa.RemoveRange(0, nivoa.Count-1);
+            for (int i = nivoa.Count-1; i>=0; i--)
+            {
+                nivoa.RemoveAt(i);
+            }
             addBallsDoc(custom);
         }
 
