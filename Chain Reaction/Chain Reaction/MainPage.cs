@@ -25,9 +25,7 @@ namespace Chain_Reaction
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
             setHighScoresPanel();
-            
-
-
+            changeView(1);
         }
         public void changeView(int view)
         {
@@ -36,15 +34,35 @@ namespace Chain_Reaction
                 this.Text = "Chain Reaction";
                 MainPanel.Visible = true;
                 HighScoresPanel.Visible = false;
+                InstructionsPanel.Visible = false;
 
             }
             else if (view == 2) //High Scores Panel is Visible
             {
                 this.Text = "High Scores";
                 MainPanel.Visible = false;
+                InstructionsPanel.Visible = false;
                 HighScoresPanel.Visible = true;
+                
                 //treba da se implementira za Custom i Instructions vo poseben panel
                 // za da nemame poveke formi za otvaranje
+            }
+            else if (view == 3) //Instructions are visible
+            {
+                this.Text = "Instructions";
+                lblInstructions.Text =
+                    string.Format("The objective of the game is to cause a chain reaction among the balls on the screen\n" +
+                    "On each level you have a number of balls that need to be expanded in order to pass the level.\n" +
+                    "In order to save your score, you have to pass all 7 levels, and add it on the leaderboard.\n" +
+                    "On the main page, you also have the option to play a custom game where you can adjust the number\n" +
+                    "of balls that appear on the screen and the number of balls needed to expand to pass the level.\n" +
+                    "The scores from the custom game cannot be saved, because that mode is intended only for fun and practicing.\n" +
+                    "Good luck and let the games begin!");
+                
+                MainPanel.Visible = false;
+                HighScoresPanel.Visible = false;
+                InstructionsPanel.Visible = true;
+
             }
             
             else
@@ -81,7 +99,7 @@ namespace Chain_Reaction
                 visibleNames[i].Text = "";
                 visiblePoints[i].Text = "";
             }
-
+            Invalidate();
         }
 
         public void submitHighScore(string name, int points)
@@ -150,6 +168,7 @@ namespace Chain_Reaction
         private void btnInstructions_Click(object sender, EventArgs e)
         {
             //ovde se otvara prozor za instrukciite
+            changeView(3);
         }
 
         private void btnCustomPlay_Click(object sender, EventArgs e)
@@ -171,6 +190,35 @@ namespace Chain_Reaction
             
 
                
+        }
+
+        private void MainPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("Are you sure you want to clear the high scores table? All of the scores will be deleted", "Delete all scores", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+            {
+
+            }
+        }
+
+        private void btnHighScores_Click(object sender, EventArgs e)
+        {
+            changeView(2);
+
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            changeView(1);
+        }
+
+        private void btnGoBack_Click(object sender, EventArgs e)
+        {
+            changeView(1);
         }
     }
 }

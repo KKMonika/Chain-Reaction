@@ -18,6 +18,13 @@ namespace Chain_Reaction
             nivoa = new List<BallsDoc>();
         }
 
+        public void Restart(bool custom)
+        {
+            nivoa.RemoveRange(0, nivoa.Count - 1);
+            addBallsDoc(custom);
+
+        }
+
         public void addBallsDoc(bool custom)
         {
             BallsDoc nivo = new BallsDoc();
@@ -48,25 +55,30 @@ namespace Chain_Reaction
                 nivo.currentLevel = BallsDoc.LEVELS.L6;
             else if (nivoa.ElementAt(nivoa.Count - 1).currentLevel == BallsDoc.LEVELS.L6)
                 nivo.currentLevel = BallsDoc.LEVELS.L7;
-            else if (nivoa.ElementAt(nivoa.Count - 1).currentLevel == BallsDoc.LEVELS.L7)
-                MessageBox.Show("You won!");
-            else
-                MessageBox.Show("You won!");
-
+            /*else
+                MessageBox.Show("You won!");*/
 
             nivoa.Add(nivo);
             currentLevel = nivo;
+            
         }
 
         public bool daliIspolnuva()
         {
-            if (currentLevel.count >= currentLevel.needToHit())
+            if (currentLevel.count >= currentLevel.needToHit() && currentLevel.currentLevel != BallsDoc.LEVELS.CUSTOM && currentLevel.currentLevel != BallsDoc.LEVELS.L7)
             {
                 changeLevel();
                 return true;
             }
+            else if (currentLevel.count >= currentLevel.needToHit() && (currentLevel.currentLevel == BallsDoc.LEVELS.CUSTOM || currentLevel.currentLevel == BallsDoc.LEVELS.L7))
+            {
+                return true;
+            }
             else
+            {
                 return false;
+            }
+                
         }
 
         public int poeniOdSiteNivoa()

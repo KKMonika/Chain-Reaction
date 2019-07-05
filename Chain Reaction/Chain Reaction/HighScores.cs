@@ -40,7 +40,7 @@ namespace Chain_Reaction
                         madeit = true;
                     }
                 }
-                this.highScores = temp.highScores;
+                highScores = temp.highScores;
 
                 return madeit;
             }

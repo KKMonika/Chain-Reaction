@@ -35,7 +35,16 @@ namespace Chain_Reaction
 
         private void nudNeedToHit_Validating(object sender, CancelEventArgs e)
         {
-           
+            if (nudNeedToHit.Value > nudMaxBalls.Value)
+            {
+                errorProvider1.SetError(nudNeedToHit, "The total number of balls in the game has to be bigger than the number of balls needed to expand");
+                e.Cancel = true;
+            }
+            else
+            {
+                errorProvider1.SetError(nudNeedToHit, null);
+                e.Cancel = false;
+            }
         }
 
         private void btnPlayCustom_Click(object sender, EventArgs e)

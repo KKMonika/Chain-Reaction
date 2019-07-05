@@ -62,11 +62,11 @@
     </Compile>
     <Compile Include="HighScoreItem.cs" />
     <Compile Include="HighScores.cs" />
-    <Compile Include="HighScoresTable.cs">
+    <Compile Include="EnterHighScore.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HighScoresTable.Designer.cs">
-      <DependentUpon>HighScoresTable.cs</DependentUpon>
+    <Compile Include="EnterHighScore.Designer.cs">
+      <DependentUpon>EnterHighScore.cs</DependentUpon>
     </Compile>
     <Compile Include="Levels.cs" />
     <Compile Include="MainPage.cs">
@@ -84,8 +84,8 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HighScoresTable.resx">
-      <DependentUpon>HighScoresTable.cs</DependentUpon>
+    <EmbeddedResource Include="EnterHighScore.resx">
+      <DependentUpon>EnterHighScore.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainPage.resx">
       <DependentUpon>MainPage.cs</DependentUpon>

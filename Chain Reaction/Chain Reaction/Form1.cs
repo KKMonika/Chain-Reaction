@@ -33,6 +33,9 @@ namespace Chain_Reaction
         public bool custom { get; set; } //flag to know if level is custom
         public Levels levelsDoc { get; set; }
 
+        EnterHighScore enterHighScoreForm;
+        public HighScores highScores { get; }
+
         private String FileName; //za serijalizacija
         public Form1(bool custom)
         {
@@ -46,40 +49,31 @@ namespace Chain_Reaction
             timer = new Timer();
             timer.Interval = 50; //test
             timer.Tick += new EventHandler(timer_Tick);
-            timer.Start(); // ke go koristime timerot za posle odredeno vreme ako ne se napravi pogodok ->GAMEOVER
+            timer.Start(); 
             leftX = 20;
             topY = 60; //test vrednosti predlog za cela forma 816:489
             width = this.Width - (3 * leftX);
             height = this.Height - (int)(2.5 * topY);
             isOpened = true;
+            enterHighScoreForm = new EnterHighScore();
+            highScores = new HighScores();
         }
        
 
-
+        private void enterScore()
+        {
+            int points = levelsDoc.poeniOdSiteNivoa();
+            if (enterHighScoreForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                HighScoreItem highScoreItem = new HighScoreItem();
+                highScoreItem.player = enterHighScoreForm.PlayerName;
+                highScoreItem.points = levelsDoc.poeniOdSiteNivoa();
+                highScores.add(highScoreItem);
+            }
+        }
 
         void timer_Tick(object sender, EventArgs e)
         {
-            /*if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L1)
-            {
-                maxTopcinja = 10;
-            }
-            else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L2)
-            {
-                maxTopcinja = 15;
-            }
-            else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L3)
-            {
-                maxTopcinja = 20;
-            }
-            else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L4)
-            {
-                maxTopcinja = 25;
-            }
-            else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L5)
-            {
-                maxTopcinja = 30;
-            }*/
-
             if (generateBall < levelsDoc.currentLevel.maxBalls())
             {
                 int x = random.Next(leftX + 10, leftX + width - 10); //leftX+10 i  leftX+width-10 zatoa sto ako se pogodi na rabot, lesno moze da izleze nadvor
@@ -108,21 +102,34 @@ namespace Chain_Reaction
                             timer.Start();
                             generateBall = 0; //si prodolzuva na naredno nivo
                         }
-                        else
+                        else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L7)
+                        {
+                            enterScore();
+                            //MessageBox.Show(string.Format("Congratulations, you won {0} points!", levelsDoc.poeniOdSiteNivoa().ToString()),);
+                        }
+                        else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.CUSTOM)
                         {
                             MessageBox.Show(string.Format("Congratulations, you won {0} points!", levelsDoc.poeniOdSiteNivoa().ToString()));
                         }
                         lblNeedToExpand.Text = levelsDoc.currentLevel.needToHit().ToString();
                         lblMaxBalls.Text = levelsDoc.currentLevel.maxBalls().ToString();
+                        lblLevel.Text = string.Format("Level: {0}", levelsDoc.getLevel().ToString());
                     }
                     else //zavrsuva igrata
                     {
-                        MessageBox.Show("Game Over");
+                        MessageBox.Show("Game Over!");
                     }
 
                     if(levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L7)//do poslednoto definirano nivo
                     {
                         int points = levelsDoc.poeniOdSiteNivoa();
+                        if (enterHighScoreForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        {
+                            HighScoreItem highScoreItem = new HighScoreItem();
+                            highScoreItem.player = enterHighScoreForm.PlayerName;
+                            highScoreItem.points = levelsDoc.poeniOdSiteNivoa();
+                            highScores.add(highScoreItem);
+                        }
                         // HIGH SCORES go definirav vo mainPage ako gi prepravame so paneli ko vo sudoku sto im se
                         //premesti ja cela ovaa forma vo poseben panel tamu
                         //ako ne stavi ja vo druga forma 
@@ -159,12 +166,12 @@ namespace Chain_Reaction
         {
             lblNeedToExpand.Text = levelsDoc.currentLevel.needToHit().ToString();
             lblMaxBalls.Text = levelsDoc.currentLevel.maxBalls().ToString();
-            
+            lblLevel.Text = string.Format("Level: {0}", levelsDoc.getLevel().ToString());
         }
 
         private void statusStrip1_Paint(object sender, PaintEventArgs e)
         {
-            toolStripStatusLabel1.Text = string.Format("Level {0}", levelsDoc.getLevel());
+            //toolStripStatusLabel1.Text = string.Format("Level {0}", levelsDoc.getLevel());
             toolStripStatusLabel2.Text = string.Format("Total points: {0}", levelsDoc.poeniOdSiteNivoa());
         }
 
@@ -182,12 +189,6 @@ namespace Chain_Reaction
             }
 
         }
-
-        /*private void Form1_ResizeEnd(object sender, EventArgs e)
-        {
-            width = this.Width - (3 * leftX);
-            height = this.Height - (int)(2.5 * topY);
-        }*/
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -268,6 +269,18 @@ namespace Chain_Reaction
         private void label2_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void backToMainToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void restartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            generateBall = 0;
+            levelsDoc.Restart(custom);
+            Invalidate();
         }
 
         /*private void timerIncrease_Tick(object sender, EventArgs e)

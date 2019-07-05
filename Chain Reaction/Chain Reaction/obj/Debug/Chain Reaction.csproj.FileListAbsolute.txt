@@ -31,3 +31,4 @@ C:\Users\Computer\Desktop\Game\Chain-Reaction\Chain Reaction\Chain Reaction\obj\
 C:\Users\Computer\Desktop\Game\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.exe
 C:\Users\Computer\Desktop\Game\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain Reaction.pdb
 D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain_Reaction.CustomGame.resources
+D:\Uni\Визуелно програмирање\Проект\Chain-Reaction\Chain Reaction\Chain Reaction\obj\Debug\Chain_Reaction.EnterHighScore.resources
