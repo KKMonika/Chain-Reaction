@@ -15,6 +15,7 @@ namespace Chain_Reaction
 {
     public partial class Form1 : Form
     {
+        public bool SaveScoreHasAppeared;
         public bool isOpened { get; set; }
         //BallsDoc ballsDoc; //treba da se pojavuvaat po odredena postignata vrednost na Radiusot na bigBall
         BigBall bigBall; //treba da se pojavuva na klik
@@ -52,6 +53,7 @@ namespace Chain_Reaction
             height = this.Height - (int)(2.5 * topY);
             isOpened = true;
         }
+       
 
 
 
@@ -118,14 +120,37 @@ namespace Chain_Reaction
                         MessageBox.Show("Game Over");
                     }
 
+                    if(levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L7)//do poslednoto definirano nivo
+                    {
+                        int points = levelsDoc.poeniOdSiteNivoa();
+                        // HIGH SCORES go definirav vo mainPage ako gi prepravame so paneli ko vo sudoku sto im se
+                        //premesti ja cela ovaa forma vo poseben panel tamu
+                        //ako ne stavi ja vo druga forma 
+
+                        /*SaveScoreHasAppeared = true;
+                        if (HS.highScores.Count == 5 && points > HS.highScores[4].points)
+                        {
+                            
+                            MessageBox.Show("\t\tCongratulations!!! \n I'm sorry but you didn't make it in the top 5.");
+                        }
+                        else
+                        {
+                           
+                           HighScoresTable hst = new HighScoresTable();
+                            hst.Show();
+                           
+                        }
+                        */
+                    }
 
                     //OVDE DA SE DODADE DODAVANJE HIGHSCORE
+
                 }
                     
             }
             
             Invalidate(true);
-            //ne dovrseno za game over da se definira posle kolku vreme
+         
         }
 
         
