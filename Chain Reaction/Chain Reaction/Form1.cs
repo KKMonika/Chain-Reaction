@@ -97,7 +97,10 @@ namespace Chain_Reaction
                     }
                     else //zavrsuva igrata
                     {
-                        MessageBox.Show("Game Over!");
+                        if (MessageBox.Show("Restart game?", "Game Over", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                        {
+                            restartToolStripMenuItem_Click(sender, e);
+                        }
                     }
                 }
                     
