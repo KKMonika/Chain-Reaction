@@ -27,19 +27,15 @@ namespace Chain_Reaction
         }
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (form1 != null && !form1.isOpened) this.Show();
+            if (form1 != null && !form1.isOpened)
+                this.Show();
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
-            //ovde treba da se otvora Form1 vo ist prozor, ne vo nov\
-            form1 = new Form1();
+            form1 = new Form1(false);
             form1.Show();
             this.Hide();
-
-
-
-
         }
 
         private void btnInstructions_Click(object sender, EventArgs e)
@@ -49,7 +45,16 @@ namespace Chain_Reaction
 
         private void btnCustomPlay_Click(object sender, EventArgs e)
         {
+            CustomGame cgForm = new CustomGame();
             
+            if (cgForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                form1 = new Form1(true);
+                form1.levelsDoc.currentLevel.customMaxBalls = cgForm.MaxBalls;
+                form1.levelsDoc.currentLevel.customNeedToHit = cgForm.needToHit;
+                form1.Show();
+                this.Hide();
+            }
         }
 
         private void MainPage_Load(object sender, EventArgs e)

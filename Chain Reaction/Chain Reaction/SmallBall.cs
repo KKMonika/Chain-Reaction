@@ -73,7 +73,7 @@ namespace Chain_Reaction
             g.FillEllipse(b, Center.X - radius, Center.Y - radius, radius * 2, radius * 2);
             if(isHit)
             {
-                g.DrawString(string.Format("+{0}", Points), font, fb, Center.X , Center.Y );
+                g.DrawString(string.Format("+{0}", Points), font, fb, Center.X - radius/2, Center.Y - radius/2);
             }
             fb.Dispose();
             b.Dispose();

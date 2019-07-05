@@ -18,16 +18,20 @@ namespace Chain_Reaction
             L4,
             L5,
             L6,
-            L7
+            L7,
+            CUSTOM
         }
         public List<SmallBall> balls { get; set; }
         public BigBall bigBall { get; set; }
         public int count { get; set; } //kolku topcinja se pogodeni
-       // public int needToHit { get; set; } // kolku topcinja treba da se pogodat za da bide pominato nivoto
+                                       // public int needToHit { get; set; } // kolku topcinja treba da se pogodat za da bide pominato nivoto
         public LEVELS currentLevel;
         public bool hasClicked { get; set; }  //se menuva vo true samo pri klik na pocetokot vo formata, posle toa pri sekoj sleden klik nema da se kreira novo topce
         public int poeniOdTekovnoNivo;
         private Font font;
+
+        public int customMaxBalls { get; set; }
+        public int customNeedToHit { get; set; }
         public BallsDoc()
         {
             hasClicked = false;
@@ -176,6 +180,7 @@ namespace Chain_Reaction
             }
             return sum;
         }*/
+        
 
         public int needToHit()
         {
@@ -195,6 +200,9 @@ namespace Chain_Reaction
                     return 27;
                 case LEVELS.L7:
                     return 32;
+                case LEVELS.CUSTOM:
+                    return customNeedToHit;
+
                 default:
                     return 0;
             }
@@ -219,6 +227,8 @@ namespace Chain_Reaction
                     return 35;
                 case LEVELS.L7:
                     return 40;
+                case LEVELS.CUSTOM:
+                    return customMaxBalls;
                 default:
                     return 0;
             }

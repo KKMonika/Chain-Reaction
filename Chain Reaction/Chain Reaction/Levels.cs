@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Chain_Reaction
 {
@@ -17,10 +18,17 @@ namespace Chain_Reaction
             nivoa = new List<BallsDoc>();
         }
 
-        public void addBallsDoc()
+        public void addBallsDoc(bool custom)
         {
             BallsDoc nivo = new BallsDoc();
-            nivo.currentLevel = BallsDoc.LEVELS.L1;
+            if (custom)
+            {
+                nivo.currentLevel = BallsDoc.LEVELS.CUSTOM;
+            }
+            else
+            {
+                nivo.currentLevel = BallsDoc.LEVELS.L1;
+            }
             nivoa.Add(nivo);
             currentLevel = nivo;
 
@@ -40,6 +48,11 @@ namespace Chain_Reaction
                 nivo.currentLevel = BallsDoc.LEVELS.L6;
             else if (nivoa.ElementAt(nivoa.Count - 1).currentLevel == BallsDoc.LEVELS.L6)
                 nivo.currentLevel = BallsDoc.LEVELS.L7;
+            else if (nivoa.ElementAt(nivoa.Count - 1).currentLevel == BallsDoc.LEVELS.L7)
+                MessageBox.Show("You won!");
+            else
+                MessageBox.Show("You won!");
+
 
             nivoa.Add(nivo);
             currentLevel = nivo;

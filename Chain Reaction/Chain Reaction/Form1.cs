@@ -16,7 +16,7 @@ namespace Chain_Reaction
     public partial class Form1 : Form
     {
         public bool isOpened { get; set; }
-        BallsDoc ballsDoc; //treba da se pojavuvaat po odredena postignata vrednost na Radiusot na bigBall
+        //BallsDoc ballsDoc; //treba da se pojavuvaat po odredena postignata vrednost na Radiusot na bigBall
         BigBall bigBall; //treba da se pojavuva na klik
         //public int maxTopcinja { get; set; }
         Color currentColor;
@@ -29,15 +29,15 @@ namespace Chain_Reaction
 
         private int generateBall = 0;
         Random random;
-        Levels levelsDoc;
+        public bool custom { get; set; } //flag to know if level is custom
+        public Levels levelsDoc { get; set; }
 
         private String FileName; //za serijalizacija
-        public Form1()
+        public Form1(bool custom)
         {
             InitializeComponent();
-            //ballsDoc = new BallsDoc(); //treba da se doraboti
             levelsDoc = new Levels();
-            levelsDoc.addBallsDoc();
+            levelsDoc.addBallsDoc(custom);
             random = new Random();
             //maxTopcinja = 10;
             this.DoubleBuffered = true;
@@ -97,18 +97,29 @@ namespace Chain_Reaction
                     
                 else
                 {
+                    
                     timer.Stop();
-                    if (levelsDoc.daliIspolnuva())
+                    if (levelsDoc.daliIspolnuva()) //ako e ispolnet uslovot, a ne e posledno ili custom nivo, tajmerot si prodolzuva, prodolzuva so iscrtuvanje za sledno nivo
                     {
-                        timer.Start();
+                        if(levelsDoc.currentLevel.currentLevel != BallsDoc.LEVELS.L7 && levelsDoc.currentLevel.currentLevel != BallsDoc.LEVELS.CUSTOM)
+                        {
+                            timer.Start();
+                            generateBall = 0; //si prodolzuva na naredno nivo
+                        }
+                        else
+                        {
+                            MessageBox.Show(string.Format("Congratulations, you won {0} points!", levelsDoc.poeniOdSiteNivoa().ToString()));
+                        }
                         lblNeedToExpand.Text = levelsDoc.currentLevel.needToHit().ToString();
                         lblMaxBalls.Text = levelsDoc.currentLevel.maxBalls().ToString();
-                        generateBall = 0;
                     }
-                    else
+                    else //zavrsuva igrata
                     {
                         MessageBox.Show("Game Over");
                     }
+
+
+                    //OVDE DA SE DODADE DODAVANJE HIGHSCORE
                 }
                     
             }
@@ -123,6 +134,7 @@ namespace Chain_Reaction
         {
             lblNeedToExpand.Text = levelsDoc.currentLevel.needToHit().ToString();
             lblMaxBalls.Text = levelsDoc.currentLevel.maxBalls().ToString();
+            
         }
 
         private void statusStrip1_Paint(object sender, PaintEventArgs e)
@@ -183,7 +195,7 @@ namespace Chain_Reaction
                 using (FileStream fileStream = new FileStream(FileName, FileMode.Create))
                 {
                     IFormatter formatter = new BinaryFormatter();
-                    formatter.Serialize(fileStream, ballsDoc);
+                    formatter.Serialize(fileStream, levelsDoc);
                 }
             }
         }
@@ -200,7 +212,7 @@ namespace Chain_Reaction
                     using (FileStream fileStream = new FileStream(FileName, FileMode.Open))
                     {
                         IFormatter formater = new BinaryFormatter();
-                        ballsDoc = (BallsDoc)formater.Deserialize(fileStream);
+                        levelsDoc = (Levels)formater.Deserialize(fileStream);
                     }
                 }
                 catch (Exception ex)
