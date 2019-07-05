@@ -92,7 +92,7 @@
             0,
             0});
             this.nudMaxBalls.Minimum = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -100,7 +100,7 @@
             this.nudMaxBalls.Size = new System.Drawing.Size(120, 20);
             this.nudMaxBalls.TabIndex = 6;
             this.nudMaxBalls.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});

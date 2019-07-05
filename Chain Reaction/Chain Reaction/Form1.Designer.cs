@@ -35,9 +35,6 @@
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.backToMainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.highScoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.lblNeedToExpand = new System.Windows.Forms.Label();
             this.lblMaxBalls = new System.Windows.Forms.Label();
@@ -69,10 +66,7 @@
             // 
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.backToMainToolStripMenuItem,
-            this.restartToolStripMenuItem,
-            this.saveGameToolStripMenuItem,
-            this.openGameToolStripMenuItem,
-            this.highScoresToolStripMenuItem});
+            this.restartToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(800, 24);
@@ -92,24 +86,6 @@
             this.restartToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.restartToolStripMenuItem.Text = "Restart";
             this.restartToolStripMenuItem.Click += new System.EventHandler(this.restartToolStripMenuItem_Click);
-            // 
-            // saveGameToolStripMenuItem
-            // 
-            this.saveGameToolStripMenuItem.Name = "saveGameToolStripMenuItem";
-            this.saveGameToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
-            this.saveGameToolStripMenuItem.Text = "Save Game";
-            // 
-            // openGameToolStripMenuItem
-            // 
-            this.openGameToolStripMenuItem.Name = "openGameToolStripMenuItem";
-            this.openGameToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
-            this.openGameToolStripMenuItem.Text = "Open Game";
-            // 
-            // highScoresToolStripMenuItem
-            // 
-            this.highScoresToolStripMenuItem.Name = "highScoresToolStripMenuItem";
-            this.highScoresToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
-            this.highScoresToolStripMenuItem.Text = "High Scores";
             // 
             // label1
             // 
@@ -209,9 +185,6 @@
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem backToMainToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem restartToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveGameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openGameToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem highScoresToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblNeedToExpand;
         private System.Windows.Forms.Label lblMaxBalls;

@@ -17,10 +17,7 @@ namespace Chain_Reaction
     {
         public bool SaveScoreHasAppeared;
         public bool isOpened { get; set; }
-        //BallsDoc ballsDoc; //treba da se pojavuvaat po odredena postignata vrednost na Radiusot na bigBall
         BigBall bigBall; //treba da se pojavuva na klik
-        //public int maxTopcinja { get; set; }
-        Color currentColor;
 
         Timer timer;
         int leftX;
@@ -35,23 +32,20 @@ namespace Chain_Reaction
 
         EnterHighScore enterHighScoreForm;
         public HighScores highScores { get; }
-
-        private String FileName; //za serijalizacija
+        
         public Form1(bool custom)
         {
             InitializeComponent();
             levelsDoc = new Levels();
             levelsDoc.addBallsDoc(custom);
             random = new Random();
-            //maxTopcinja = 10;
             this.DoubleBuffered = true;
-            currentColor = Color.Red; // pokasno da se napravi da se bira boja
             timer = new Timer();
             timer.Interval = 50; //test
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start(); 
             leftX = 20;
-            topY = 60; //test vrednosti predlog za cela forma 816:489
+            topY = 60; 
             width = this.Width - (3 * leftX);
             height = this.Height - (int)(2.5 * topY);
             isOpened = true;
@@ -83,7 +77,7 @@ namespace Chain_Reaction
             }
 
             levelsDoc.currentLevel.MoveBalls(leftX, topY, width, height);
-            if (levelsDoc.currentLevel.hasClicked) // ako ima mouse click togas da proveruva kolizii
+            if (levelsDoc.currentLevel.hasClicked) // ako ima mouse click togas proveruva kolizii
             {
                 if (levelsDoc.currentLevel.isActive())
                 {
@@ -97,17 +91,12 @@ namespace Chain_Reaction
                     timer.Stop();
                     if (levelsDoc.daliIspolnuva()) //ako e ispolnet uslovot, a ne e posledno ili custom nivo, tajmerot si prodolzuva, prodolzuva so iscrtuvanje za sledno nivo
                     {
-                        if(levelsDoc.currentLevel.currentLevel != BallsDoc.LEVELS.L7 && levelsDoc.currentLevel.currentLevel != BallsDoc.LEVELS.CUSTOM)
+                        if(levelsDoc.currentLevel.currentLevel != BallsDoc.LEVELS.NA && levelsDoc.currentLevel.currentLevel != BallsDoc.LEVELS.CUSTOM)
                         {
                             timer.Start();
                             generateBall = 0; //si prodolzuva na naredno nivo
                         }
-                        else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L7)
-                        {
-                            enterScore();
-                            //MessageBox.Show(string.Format("Congratulations, you won {0} points!", levelsDoc.poeniOdSiteNivoa().ToString()),);
-                        }
-                        else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.CUSTOM)
+                        else if (levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.NA || levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.CUSTOM)
                         {
                             MessageBox.Show(string.Format("Congratulations, you won {0} points!", levelsDoc.poeniOdSiteNivoa().ToString()));
                         }
@@ -119,39 +108,6 @@ namespace Chain_Reaction
                     {
                         MessageBox.Show("Game Over!");
                     }
-
-                    if(levelsDoc.currentLevel.currentLevel == BallsDoc.LEVELS.L7)//do poslednoto definirano nivo
-                    {
-                        int points = levelsDoc.poeniOdSiteNivoa();
-                        if (enterHighScoreForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                        {
-                            HighScoreItem highScoreItem = new HighScoreItem();
-                            highScoreItem.player = enterHighScoreForm.PlayerName;
-                            highScoreItem.points = levelsDoc.poeniOdSiteNivoa();
-                            highScores.add(highScoreItem);
-                        }
-                        // HIGH SCORES go definirav vo mainPage ako gi prepravame so paneli ko vo sudoku sto im se
-                        //premesti ja cela ovaa forma vo poseben panel tamu
-                        //ako ne stavi ja vo druga forma 
-
-                        /*SaveScoreHasAppeared = true;
-                        if (HS.highScores.Count == 5 && points > HS.highScores[4].points)
-                        {
-                            
-                            MessageBox.Show("\t\tCongratulations!!! \n I'm sorry but you didn't make it in the top 5.");
-                        }
-                        else
-                        {
-                           
-                           HighScoresTable hst = new HighScoresTable();
-                            hst.Show();
-                           
-                        }
-                        */
-                    }
-
-                    //OVDE DA SE DODADE DODAVANJE HIGHSCORE
-
                 }
                     
             }
@@ -203,53 +159,7 @@ namespace Chain_Reaction
             Invalidate(true);
         }
         
-
-        private void saveFile()
-        {
-            if (FileName == null)
-            {
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.Filter = "ChainReaction file (*.crf)|*.crf";
-                saveFileDialog.Title = "ChainReaction file";
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    FileName = saveFileDialog.FileName;
-                }
-            }
-            if (FileName != null)
-            {
-                using (FileStream fileStream = new FileStream(FileName, FileMode.Create))
-                {
-                    IFormatter formatter = new BinaryFormatter();
-                    formatter.Serialize(fileStream, levelsDoc);
-                }
-            }
-        }
-        private void openFile()
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "ChainReaction file (*.crf)|*.crf";
-            openFileDialog.Title = "ChainReaction file";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                FileName = openFileDialog.FileName;
-                try
-                {
-                    using (FileStream fileStream = new FileStream(FileName, FileMode.Open))
-                    {
-                        IFormatter formater = new BinaryFormatter();
-                        levelsDoc = (Levels)formater.Deserialize(fileStream);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Could not read file: " + FileName);
-                    FileName = null;
-                    return;
-                }
-                Invalidate(true);
-            }
-        }
+        
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -280,12 +190,13 @@ namespace Chain_Reaction
         {
             generateBall = 0;
             levelsDoc.Restart(custom);
+            lblNeedToExpand.Text = levelsDoc.currentLevel.needToHit().ToString();
+            lblMaxBalls.Text = levelsDoc.currentLevel.maxBalls().ToString();
+            lblLevel.Text = string.Format("Level: {0}", levelsDoc.getLevel().ToString());
+            timer.Start();
             Invalidate();
         }
 
-        /*private void timerIncrease_Tick(object sender, EventArgs e)
-        {
-
-        }*/
+        
     }
 }

@@ -37,16 +37,6 @@ namespace Chain_Reaction
 
         private void tbPlayerName_Validating(object sender, CancelEventArgs e)
         {
-            if (tbPlayerName.Text.Length == 0)
-            {
-                errorProvider1.SetError(tbPlayerName, "You have to enter a name!");
-                e.Cancel = true;
-            }
-            else
-            {
-                errorProvider1.SetError(tbPlayerName, null);
-                e.Cancel = false;
-            }
         }
 
         private void btnNo_Click(object sender, EventArgs e)

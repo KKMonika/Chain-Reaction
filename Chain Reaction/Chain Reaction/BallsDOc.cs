@@ -19,7 +19,8 @@ namespace Chain_Reaction
             L5,
             L6,
             L7,
-            CUSTOM
+            CUSTOM,
+            NA
         }
         public List<SmallBall> balls { get; set; }
         public BigBall bigBall { get; set; }
@@ -75,8 +76,7 @@ namespace Chain_Reaction
             //ako foreach ne vratil true, znaci nema aktivni mali topcinja
             return bigBall != null; //edinstvena proverka ostanata e dali bigBall e aktivna
         }
-
-        // ja prepraviv CheckCollisons
+        
         public void checkCollisions()
         {
             for (int i = 0; i < balls.Count; i++)
@@ -170,16 +170,7 @@ namespace Chain_Reaction
             
         }
 
-        /*public int poeniOdTekovnoNivo()
-        {
-            int sum = 0;
-            foreach(SmallBall s in balls)
-            {
-                if (s.isHit)
-                    sum += s.Points;
-            }
-            return sum;
-        }*/
+        
         
 
         public int needToHit()

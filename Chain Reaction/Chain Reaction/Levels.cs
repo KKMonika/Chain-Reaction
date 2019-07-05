@@ -20,9 +20,8 @@ namespace Chain_Reaction
 
         public void Restart(bool custom)
         {
-            nivoa.RemoveRange(0, nivoa.Count - 1);
+            nivoa.RemoveRange(0, nivoa.Count-1);
             addBallsDoc(custom);
-
         }
 
         public void addBallsDoc(bool custom)
@@ -40,7 +39,7 @@ namespace Chain_Reaction
             currentLevel = nivo;
 
         }
-        public void changeLevel()
+        private void changeLevel()
         {
             BallsDoc nivo = new BallsDoc();
             if (nivoa.ElementAt(nivoa.Count - 1).currentLevel == BallsDoc.LEVELS.L1)
@@ -55,8 +54,8 @@ namespace Chain_Reaction
                 nivo.currentLevel = BallsDoc.LEVELS.L6;
             else if (nivoa.ElementAt(nivoa.Count - 1).currentLevel == BallsDoc.LEVELS.L6)
                 nivo.currentLevel = BallsDoc.LEVELS.L7;
-            /*else
-                MessageBox.Show("You won!");*/
+            else if (nivoa.ElementAt(nivoa.Count - 1).currentLevel == BallsDoc.LEVELS.L7)
+                nivo.currentLevel = BallsDoc.LEVELS.NA;
 
             nivoa.Add(nivo);
             currentLevel = nivo;

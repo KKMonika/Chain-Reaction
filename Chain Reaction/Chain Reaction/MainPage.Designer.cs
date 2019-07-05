@@ -55,7 +55,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.btnHighScores = new System.Windows.Forms.Button();
             this.InstructionsPanel = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
             this.lblInstructions = new System.Windows.Forms.Label();
@@ -70,7 +69,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(252, 35);
+            this.label1.Location = new System.Drawing.Point(243, 66);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(279, 44);
             this.label1.TabIndex = 0;
@@ -79,7 +78,7 @@
             // btnPlay
             // 
             this.btnPlay.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPlay.Location = new System.Drawing.Point(260, 112);
+            this.btnPlay.Location = new System.Drawing.Point(251, 143);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(271, 55);
             this.btnPlay.TabIndex = 1;
@@ -90,7 +89,7 @@
             // btnInstructions
             // 
             this.btnInstructions.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInstructions.Location = new System.Drawing.Point(260, 269);
+            this.btnInstructions.Location = new System.Drawing.Point(251, 300);
             this.btnInstructions.Name = "btnInstructions";
             this.btnInstructions.Size = new System.Drawing.Size(271, 56);
             this.btnInstructions.TabIndex = 3;
@@ -101,7 +100,7 @@
             // btnCustomPlay
             // 
             this.btnCustomPlay.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCustomPlay.Location = new System.Drawing.Point(260, 190);
+            this.btnCustomPlay.Location = new System.Drawing.Point(251, 221);
             this.btnCustomPlay.Name = "btnCustomPlay";
             this.btnCustomPlay.Size = new System.Drawing.Size(271, 56);
             this.btnCustomPlay.TabIndex = 4;
@@ -140,7 +139,7 @@
             this.btnClear.TabIndex = 11;
             this.btnClear.Text = "Clear scores";
             this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.button2_Click);
+            //this.btnClear.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnBack
             // 
@@ -321,7 +320,6 @@
             // 
             // MainPanel
             // 
-            this.MainPanel.Controls.Add(this.btnHighScores);
             this.MainPanel.Controls.Add(this.label1);
             this.MainPanel.Controls.Add(this.btnInstructions);
             this.MainPanel.Controls.Add(this.btnPlay);
@@ -331,17 +329,6 @@
             this.MainPanel.Size = new System.Drawing.Size(779, 436);
             this.MainPanel.TabIndex = 6;
             this.MainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.MainPanel_Paint);
-            // 
-            // btnHighScores
-            // 
-            this.btnHighScores.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHighScores.Location = new System.Drawing.Point(260, 340);
-            this.btnHighScores.Name = "btnHighScores";
-            this.btnHighScores.Size = new System.Drawing.Size(271, 56);
-            this.btnHighScores.TabIndex = 5;
-            this.btnHighScores.Text = "High Scores";
-            this.btnHighScores.UseVisualStyleBackColor = true;
-            this.btnHighScores.Click += new System.EventHandler(this.btnHighScores_Click);
             // 
             // InstructionsPanel
             // 
@@ -390,9 +377,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.InstructionsPanel);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.HighScoresPanel);
+            this.Controls.Add(this.InstructionsPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "MainPage";
             this.Text = "MainPage";
             this.Load += new System.EventHandler(this.MainPage_Load);
@@ -416,7 +404,6 @@
         private System.Windows.Forms.Button btnCustomPlay;
         private System.Windows.Forms.Panel HighScoresPanel;
         private System.Windows.Forms.Panel MainPanel;
-        private System.Windows.Forms.Button btnHighScores;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnBack;

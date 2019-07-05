@@ -24,7 +24,7 @@ namespace Chain_Reaction
             timer.Interval = 10;
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
-            setHighScoresPanel();
+            //setHighScoresPanel();
             changeView(1);
         }
         public void changeView(int view)
@@ -43,9 +43,6 @@ namespace Chain_Reaction
                 MainPanel.Visible = false;
                 InstructionsPanel.Visible = false;
                 HighScoresPanel.Visible = true;
-                
-                //treba da se implementira za Custom i Instructions vo poseben panel
-                // za da nemame poveke formi za otvaranje
             }
             else if (view == 3) //Instructions are visible
             {
@@ -70,87 +67,7 @@ namespace Chain_Reaction
                 MessageBox.Show("Ova uste ne e implementirano");
             }
         }
-        public void setHighScoresPanel()
-        {
-            List<Label> visibleNames = new List<Label>();
-            visibleNames.Add(label9);
-            visibleNames.Add(label10);
-            visibleNames.Add(label11);
-            visibleNames.Add(label12);
-            visibleNames.Add(label13);
-
-            List<Label> visiblePoints = new List<Label>();
-            visiblePoints.Add(label3);
-            visiblePoints.Add(label4);
-            visiblePoints.Add(label5);
-            visiblePoints.Add(label6);
-            visiblePoints.Add(label17);
-
-            HighScores toBeShown = new HighScores();
-
-            for (int i = 0; i < toBeShown.highScores.Count; i++)
-            {
-                visibleNames[i].Text = toBeShown.highScores[i].player;
-                visiblePoints[i].Text = toBeShown.highScores[i].points.ToString();
-                
-            }
-            for (int i = toBeShown.highScores.Count; i < 5; i++)
-            {
-                visibleNames[i].Text = "";
-                visiblePoints[i].Text = "";
-            }
-            Invalidate();
-        }
-
-        public void submitHighScore(string name, int points)
-        {
-            HighScoreItem item = new HighScoreItem();
-            item.player = name;
-            item.points = points;
-            hs.add(item);
-
-            
-        }
-        /// <summary>
-        /// Serialize a Scores object to a binary file.
-        /// </summary>
-        /// <param name="HS">T object that needs to be serialized.</param>
-        private static void BinarySerializeScores(HighScores HS)
-        {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            using (FileStream str = File.Create(path + "\\HighScores.hs"))
-            {
-                File.SetAttributes(path + "\\HighScores.hs", File.GetAttributes(path + "\\HighScores.hs") | FileAttributes.Hidden);
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(str, HS);
-            }
-        }
-        /// <summary>
-        /// Deserialize a Scores object from a binary file.
-        /// </summary>
-        /// <returns>Scores()</returns>
-        private static HighScores BinaryDeserializeScores()
-        {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            HighScores HS = null;
-            try
-            {
-
-                using (FileStream str = File.OpenRead(path + "\\HighScores.hs"))
-                {
-                    BinaryFormatter bf = new BinaryFormatter();
-                    HS = (HighScores)bf.Deserialize(str);
-                }
-
-                File.Delete(path + "\\HighScores.hs");
-
-                return HS;
-            }
-            catch (FileNotFoundException)
-            {
-                return new HighScores();
-            }
-        }
+        
 
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -197,19 +114,7 @@ namespace Chain_Reaction
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if(MessageBox.Show("Are you sure you want to clear the high scores table? All of the scores will be deleted", "Delete all scores", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
-            {
-
-            }
-        }
-
-        private void btnHighScores_Click(object sender, EventArgs e)
-        {
-            changeView(2);
-
-        }
+        
 
         private void btnBack_Click(object sender, EventArgs e)
         {
